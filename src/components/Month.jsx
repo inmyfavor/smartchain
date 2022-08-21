@@ -2,17 +2,26 @@ import React from 'react';
 
 import classNames from 'classnames';
 
+const months = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
 
-const days = ['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'вс'];
+function getFirstDay(date) {
+    return date.getDay === 0 ? 6 : date.getDay() - 1;
+};
+
+const dayNames = ['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'вс'];
 const dates = Array.from({length:31}, (_,i)=>i+1);
 
 const Month = (props) => {
-    const padding = Array.from({length:props.firstDay}, (_,i)=>i);
+    const initialDate = new Date(`${props.date.getFullYear()}/${props.date.getMonth()+1}`);
+    const month = months[initialDate.getMonth()];
+    const days = new Date(initialDate.getFullYear(), initialDate.getMonth()+1, 0).getDate();
+    const firstDay = getFirstDay(initialDate);
+    const padding = Array.from({length:firstDay}, (_,i)=>i);
     return (
         <div className='flex flex-col align-center'>
-            <div className='font-medium text-white text-[18px] text-center mb-[24px]'>{props.month}</div>
+            <div className='font-medium text-white text-[18px] text-center mb-[24px]'>{month}</div>
             <div className='flex flex-row gap-[14px] mb-[16px]'>
-                {days.map(day => {
+                {dayNames.map(day => {
                     return (
                         <div key={'day:'+day} className='text-white text-[14px] w-[32px] h-[23px] text-center'>
                             {day}
@@ -26,8 +35,8 @@ const Month = (props) => {
                         <div key={'pad:'+pad} className='w-[32px] h-[32px]'></div>
                     )
                 })}
-                {dates.slice(0,props.days).map(date => {
-                    date = new Date(props.date.setDate(date));
+                {dates.slice(0,days).map(date => {
+                    date = new Date(initialDate.setDate(date));
                     return (
                         <button 
                             onClick={() => {

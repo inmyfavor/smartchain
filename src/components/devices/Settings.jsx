@@ -67,7 +67,7 @@ const Settings = (props) => {
             <div className='flex flex-row gap-[120px] mb-[4px]'>
                 <div className='font-medium text-white text-[16px]'>Галерея:</div>
                 <button 
-                    onClick={()=>navigate('../mycontent')}
+                    onClick={()=>navigate('/')}
                     className='font-medium text-text-blue text-[14px]'>
                         ОТКРЫТЬ
                 </button>
