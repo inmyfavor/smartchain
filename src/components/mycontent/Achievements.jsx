@@ -1,16 +1,23 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useMemo } from 'react';
 
 import {
     useFloating,
+    autoUpdate,
     offset,
     shift,
-    arrow
-  } from '@floating-ui/react-dom';
+    arrow,
+    FloatingPortal,
+    flip
+} from '@floating-ui/react-dom-interactions';
 
 import {ReactComponent as TrashIcon} from '../icons/trash.svg';
 import {ReactComponent as ExitIcon} from '../icons/exit.svg';
+import {ReactComponent as CupIcon} from '../icons/cup.svg';
+import {ReactComponent as StarIcon} from '../icons/star.svg';
 
-const achievements = [
+import PageNav from '../PageNav.jsx';
+
+let achievements = [
     {
         id: '1',
         image: 'images/ach-1.png',
@@ -34,20 +41,35 @@ const achievements = [
     },
 ];
 
-let opened;
 const Card = (props) => {
     const [isModalVisible, setIsModalVisible] = useState(false);
     const arrowRef = useRef(null);
-    const {x, y, reference, floating, strategy, middlewareData} = useFloating({
+    const {x, y, placement, reference, floating, refs, strategy, middlewareData} = useFloating({
+        whileElementsMounted: autoUpdate,
         placement: 'bottom',
-        middleware: [offset(32), shift(), arrow({element: arrowRef})],
+        middleware: [offset(32), flip(), shift({ padding: 32 }), arrow({element: arrowRef})],
     });
+
+    const staticSide = useMemo(() => ({
+        top: 'bottom',
+        right: 'left',
+        bottom: 'top',
+        left: 'right',
+    }[placement.split('-')[0]]), [placement]);
+
+    function closeModal(event) {
+        if (event.path.indexOf(refs.reference.current) !== -1) {
+            return
+        }
+        setIsModalVisible(false);
+        window.removeEventListener('click', closeModal);
+    }
+    
     return <>
         <div
-            onClick={()=>{
-                if (opened) opened();
-                opened = () => setIsModalVisible(false);
-                setIsModalVisible(true)
+            onClick={() => {
+                window.addEventListener('click', closeModal);
+                setIsModalVisible(true);
             }}
             ref={reference}
             style={{
@@ -56,45 +78,49 @@ const Card = (props) => {
                 '--tw-gradient-stops': 'var(--tw-gradient-from), var(--tw-gradient-to)',
                 boxShadow: `-1px -1px 6px 0px ${props.gradientFrom}, 1px 1px 6px 0px ${props.gradientTo}`
             }}
-            className='cursor-pointer relative flex items-end justify-end w-[128px] h-[142px] bg-gradient-to-br rounded-[16px]'
+            className='cursor-pointer relative flex items-end justify-end w-[128px] h-[142px] bg-gradient-to-br rounded-[16px] z-10'
         >
             <div className='absolute w-full h-full flex items-center justify-center'>
                 <img src={props.image} alt=''/>
             </div>
             <div className='flex items-center justify-center gap-[2px] rounded-br-[16px] rounded-tl-[3px] w-[44px] h-[30px] bg-white'>
                 <span className='text-14px text-dark-blue mt-[2px]'>{props.cups}</span>
-                <img src='svg/cup.svg' alt=''/>
+                <CupIcon className='text-gold'/>
             </div>
         </div>
         
-        {
-            isModalVisible &&
-            <>
-                <div
-                    ref={floating}
-                    style={{
-                        position: strategy,
-                        top: y ?? 0,
-                        left: x ?? 0,
-                    }}
-                >
+        <FloatingPortal>
+            {
+                isModalVisible &&
+                <>
                     <div
-                        className='text-dark-blue'
+                        onClick={(e) => e.stopPropagation()}
+                        ref={floating}
                         style={{
                             position: strategy,
-                            top: middlewareData?.arrow?.y ?? 0,
-                            left: middlewareData?.arrow?.x ?? 0,
-                            background: 'currentColor',
-                            width: '64px',
-                            height: '64px',
-                            transform: 'rotate(45deg)'
+                            top: y ?? 0,
+                            left: x ?? 0,
                         }}
-                        ref={arrowRef} />
-                    <Modal close={() => setIsModalVisible(false)}/>
-                    
-                </div>
-            </>   
-        }
+                    >
+                        <div
+                            className='text-dark-blue z-10'
+                            style={{
+                                position: strategy,
+                                top: middlewareData?.arrow?.y ?? '',
+                                left: middlewareData?.arrow?.x ?? '',
+                                background: 'currentColor',
+                                width: '64px',
+                                height: '64px',
+                                transform: 'rotate(45deg)',
+                                [staticSide]: '-4px',
+                            }}
+                            ref={arrowRef} />
+                        <Modal close={() => setIsModalVisible(false)}/>
+                        
+                    </div>
+                </>   
+            }
+        </FloatingPortal>
     </>
 };
 
@@ -118,26 +144,66 @@ const Saved = () => {
     );
 };
 
+const gameAch = [
+    { id: 1, name: 'Червь', points: 150, icon: <CupIcon className='text-bronze'/> },
+    { id: 2, name: 'Уж', points: 300, icon: <CupIcon className='text-silver'/> },
+    { id: 3, name: 'Удав', points: 500, icon: <CupIcon className='text-gold'/> },
+    { id: 4, name: 'Питон', points: 1000, icon: <StarIcon/> },
+    { id: 5, name: 'Чёрная мамба', points: 2000, icon: <StarIcon/> },
+];
+
+const GameAchievements = (props) => {
+    let curPoints = 150;
+    return (
+        <div className='flex flex-row justify-between items-start mr-[200px] mb-[12px]'>
+            <div className='flex flex-row items-center gap-[8px]'>
+                {props.icon}
+                <span className='text-white text-[16px]'>{props.name}</span>
+            </div>
+            <div className='flex flex-col gap-[4px]'>
+                <div className='h-[16px] w-[136px] rounded-[8px] border border-text-blue'>
+                    <div style={{width: (curPoints/props.points)*136}} className='h-full rounded-[8px] bg-text-blue'></div>
+                </div>
+                <div className='text-text-blue text-[10px] text-center'>{curPoints} / {props.points} очков</div>
+            </div>
+        </div>
+    );
+};
+
+const tabs = {
+    'saved': 'Мои рисунки',
+    'gameAchievements': 'Игровые достижения'
+};
+
 const Modal = (props) => {
-    return <>
-        <div className='relative flex flex-col bg-dark-blue justify-left relative w-[592px] min-h-[300px] p-[32px] rounded-[16px]'>
+    const [tab, setTab] = useState('saved');
+    return (
+        <div className='relative flex flex-col bg-dark-blue justify-left relative w-[592px] min-h-[300px] p-[32px] rounded-[16px] z-10'>
             <button
             className='absolute right-[20px] top-[20px]'>
                 <ExitIcon onClick={props.close} className='transition-all text-text-gray hover:text-white'/>
             </button>
-            <div className='flex flex-row gap-[24px] mb-[26px]'>
-                <span className='font-medium text-[18px] text-white'>Сохранения игры</span>
-                <span className='font-medium text-[18px] text-white'>Игровые достижения</span>
+            <div>
+            <div className='mb-[26px]'>
+                <PageNav tab={tab} setTab={setTab} tabs={tabs} gap='80px' text='18px' flex='row'/>
             </div>
-            <Saved/>
+                {
+                    tab === 'saved'
+                        ? <Saved />
+                    : tab === 'gameAchievements'
+                        ? gameAch.map(gAch => <GameAchievements key={'gAch:'+gAch.id} {...gAch}/>)
+                    : null
+                }
+            </div>
         </div>
-    </>
+    );
+
 };
 
 const Achievements = () => {
     return (
         <div className='flex flex-row flex-wrap gap-[32px]'>
-            {achievements.map(ach => <Card key={'ach:'+ach.id} {...ach}/>)}
+            {achievements.map((ach, index) => <Card key={'ach:'+index} {...ach}/>)}
         </div>
     );
 };

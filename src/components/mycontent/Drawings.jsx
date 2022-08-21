@@ -122,7 +122,7 @@ const Placement = (props) => {
                 Скамейка №{ props.id.length !== 4 ? '0'.repeat(4-props.id.length) + props.id : props.id }
             </div>
             <div className='flex flex-row items-center gap-[10px]'>
-                <img src='svg/calendar.svg' alt=''/>
+            <img src='svg/calendar.svg' alt=''/>
                 <span className='text-[12px] text-text-gray'>{props.date}</span>
             </div>
             <div className='flex flex-row items-center gap-[11px]'>

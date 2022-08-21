@@ -4,8 +4,8 @@ import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 const links = {
-    '/mycontent': 'Мой конент',
-    '/advertisment': 'Реклама'
+    '/mycontent': 'Мой контент',
+    '/advertisement': 'Реклама'
 }
 
 const HeaderNav = () => {
