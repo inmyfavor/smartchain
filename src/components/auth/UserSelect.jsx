@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-
+import { useNavigate, useLocation } from 'react-router-dom';
 
 import classNames from 'classnames';
+
+import { useAuth } from '../../auth';
 
 
 const User = (props) => {
@@ -19,12 +20,25 @@ const User = (props) => {
             <div className='mb-[16px]'></div>
             <div className='text-white text-[18px] font-medium text-center'>{props.name}</div>
         </div>
-    )
-}
+    );
+};
 
 const UserSelect = () => {
-    const [selectedUser, setSelectedUser] = useState(null);
     const navigate = useNavigate();
+    const location = useLocation();
+    const auth = useAuth();
+
+    const from = location.state?.from?.pathname || "/";
+
+    function handleSubmit(event) {
+        event.preventDefault();
+
+        const user = selectedUser === 'Прохожий' ? 'stranger' : 'owner'
+        auth.signin(user);
+        navigate(from, { replace: true });
+    }
+
+    const [selectedUser, setSelectedUser] = useState(null);
     return (
         <div className='absolute flex w-full h-full justify-center items-center z-[1]'>
             <div className='flex flex-col min-h-[200px] w-[448px] rounded-[16px] shadow-md bg-header-blue p-[32px]'>
@@ -37,7 +51,7 @@ const UserSelect = () => {
                 <div className='mb-[24px]'></div>
                 <div className='flex justify-center'>
                     <button
-                        onClick={selectedUser==='Прохожий' ? () => navigate('/stranger/mycontent') : () => navigate('/owner/mycontent')}
+                        onClick={handleSubmit}
                         type='submit' className='bg-gradient-to-br from-[#ffe555] to-[#fa5ddb] py-[8px] 
                         text-center w-[176px] mt-[24px] text-white text-[18px] font-medium rounded-[8px]'
                     >

@@ -14,7 +14,7 @@ const BackgroundX= (props) => {
             <img style={{right: (9 + props.x)+'%'}} className='absolute w-[3%] h-1/12 bottom-[53%] animate-[flow_2s_infinite]' src='svg/smile.svg' alt=''/>
         </div>
     );
-}
+};
 
 const breakPoints = [960, 1200, 1440, 1920];
 const backgrounds = [<BackgroundX x={0}/>, <BackgroundX x={3}/>, <BackgroundX x={6}/>, <BackgroundX x={9}/>]
@@ -23,7 +23,7 @@ function getBackground() {
         if (window.innerWidth < breakPoints[i]) return backgrounds[i];
     }
     return backgrounds[breakPoints.length - 1];
-}
+};
 
 const Background = () => {
     const [background, setBackground] = useState(getBackground());
@@ -43,4 +43,4 @@ const Background = () => {
     return background;
 };
 
-export default Background
+export default Background;

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
-import PageNav from '../PageNav.jsx';
-import Input from '../Input.jsx';
+import PageNav from './PageNav.jsx';
+import Input from './Input.jsx';
 
 const tabs = {
     'profile': 'Профиль',

@@ -1,5 +1,5 @@
-import {ReactComponent as CupIcon} from '../../icons/cup.svg';
-import {ReactComponent as StarIcon} from '../../icons/star.svg';
+import {ReactComponent as CupIcon} from '../icons/cup.svg';
+import {ReactComponent as StarIcon} from '../icons/star.svg';
 
 export const initialCardsStr = [
     {
@@ -102,3 +102,27 @@ export const achievementsStr = [
         ]
     },
 ];
+
+export const area = [
+    {id: '1', address: 'г.Москва,ул.Строителей', lat: 55.751999, lon: 37.617734},
+    {id: '2', address: 'г.Москва,ул.Житная', lat: 55.751399, lon: 37.417734},
+    {id: '3', address: 'г.Москва,ул.Садовая-Сухаревская', lat: 55.756969, lon: 37.6345734},
+    {id: '4', address: 'г.Москва,ул.Спартаковская', number: 3, lat: 55.756969, lon: 37.6143634},
+];
+
+export const show = [
+    {id: 1, name: 'Реклама сервиса', date: '06/05/2021 - 08/05/2021', wasted: '200/300', areaId: '1' },
+    {id: 2, name: 'Реклама магазина', date: '06/05/2021 - 08/05/2021', wasted: '1000/2000', areaId: '2'},
+    {id: 3, name: 'Реклама товаров', date: '06/05/2021 - 08/05/2021', wasted: '70/3000', areaId: '3'},
+];
+
+export const initialModeration = [
+    {id: 1, name: 'Реклама сервиса', date: '06/05/2021 - 08/05/2021', price: '300', status: 'accepted', areaId: '1'},
+    {id: 2, name: 'Реклама магазина', date: '06/05/2021 - 08/05/2021', price: '2000', status: 'checking', areaId: '2'},
+    {id: 3, name: 'Реклама товаров', date: '06/05/2021 - 08/05/2021', price: '3000', status: 'rejected', areaId: '3'},
+];
+
+export const links = {
+    '/': 'Мой контент',
+    '/advertisement': 'Реклама'
+}
