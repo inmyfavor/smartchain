@@ -37,7 +37,7 @@ const UserSelect = () => {
                 <div className='mb-[24px]'></div>
                 <div className='flex justify-center'>
                     <button
-                        onClick={() => navigate('/mycontent')}
+                        onClick={selectedUser==='Прохожий' ? () => navigate('/stranger/mycontent') : () => navigate('/owner/mycontent')}
                         type='submit' className='bg-gradient-to-br from-[#ffe555] to-[#fa5ddb] py-[8px] 
                         text-center w-[176px] mt-[24px] text-white text-[18px] font-medium rounded-[8px]'
                     >

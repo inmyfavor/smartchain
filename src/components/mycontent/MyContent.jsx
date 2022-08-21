@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
 
-import Page from '../Page.jsx';
-import HeaderNav from '../HeaderNav.jsx';
-
 import Drawings from './Drawings.jsx';
 import Achievements from './Achievements.jsx';
 import PageNav from '../PageNav.jsx';
@@ -12,23 +9,21 @@ const tabs = {
     'achievements': 'Мои игровые достижения'
 }
 
-const MyContent = () => {
+const MyContent = (props) => {
     const [tab, setTab] = useState('drawings');
     return (
-        <Page header={<HeaderNav/>}>
-            <div className='mx-[72px] my-[50px]'>
-                <div className='mb-[40px]'>
-                    <PageNav tab={tab} setTab={setTab} tabs={tabs} gap='85px' text='20px' flex='row'/>
-                </div>
-                {
-                    tab === 'drawings'
-                        ? <Drawings />
-                    : tab === 'achievements'
-                        ? <Achievements />
-                    : null
-                }
+        <div className='mx-[72px] my-[50px]'>
+            <div className='mb-[40px]'>
+                <PageNav tab={tab} setTab={setTab} tabs={tabs} gap='85px' text='20px' flex='row'/>
             </div>
-        </Page>
+            {
+                tab === 'drawings'
+                    ? <Drawings initialCards={props.initialCards}/>
+                : tab === 'achievements'
+                    ? <Achievements achievements={props.achievements} gameAch={props.gameAch}/>
+                : null
+            }
+        </div>
     );
 };
 

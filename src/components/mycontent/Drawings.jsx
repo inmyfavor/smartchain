@@ -2,62 +2,7 @@ import React, { useReducer, useState } from 'react';
 
 import {ReactComponent as ExitIcon} from '../icons/exit.svg';
 
-const initialCards = [
-    {
-        id: '1',
-        name: 'Пёсель',
-        image: 'images/content-1.png',
-        placements: [
-            {id: '1', date: '1/04/2021-3/04/2021', location: 'г.Москва,ул.Строителей'},
-            {id: '2', date: '1/04/2021-3/04/2021', location: 'г.Москва,ул.Строителей'},
-            {id: '3', date: '1/04/2021-3/04/2021', location: 'г.Москва,ул.Строителей'},
-            {id: '4', date: '1/04/2021-3/04/2021', location: 'г.Москва,ул.Строителей'}
-        ]
-    },
-    {
-        id: '2',
-        name: 'Кисель',
-        image: 'images/content-2.png',
-        placements: [
-            {id: '1', date: '1/04/2021-3/04/2021', location: 'г.Москва,ул.Строителей'}
-        ]
-    },
-    {
-        id: '3',
-        name: 'Гусель',
-        image: 'images/content-3.png',
-        placements: [
-            {id: '1', date: '1/04/2021-3/04/2021', location: 'г.Москва,ул.Строителей'}
-        ]
-    },
-    {
-        id: '4',
-        name: 'Вебрюдиль',
-        image: 'images/content-4.png',
-        placements: [
-            {id: '1', date: '1/04/2021-3/04/2021', location: 'г.Москва,ул.Строителей'},
-            {id: '2', date: '1/04/2021-3/04/2021', location: 'г.Москва,ул.Строителей'},
-            {id: '3', date: '1/04/2021-3/04/2021', location: 'г.Москва,ул.Строителей'},
-            {id: '4', date: '1/04/2021-3/04/2021', location: 'г.Москва,ул.Строителей'}
-        ]
-    },
-    {
-        id: '5',
-        name: 'Пупсень',
-        image: 'images/content-5.png',
-        placements: [
-            {id: '1', date: '1/04/2021-3/04/2021', location: 'г.Москва,ул.Строителей'}
-        ]
-    },
-    {
-        id: '6',
-        name: 'Вупсень',
-        image: 'images/content-6.png',
-        placements: [
-            {id: '1', date: '1/04/2021-3/04/2021', location: 'г.Москва,ул.Строителей'}
-        ]
-    },
-];
+// import { initialCards } from '../strangerData/DataStr';
 
 function cardReducer(state, event) {
     if (event.type === 'delete') {
@@ -65,7 +10,6 @@ function cardReducer(state, event) {
     }
     return state;
 }
-
 
 const Card = (props) => {
     const [modal, setModal] = useState(null);
@@ -164,8 +108,8 @@ const Modal = (props) => {
         : null;
 };
 
-const Drawings = () => {
-    const [cards, dispatch] = useReducer(cardReducer, initialCards);
+const Drawings = (props) => {
+    const [cards, dispatch] = useReducer(cardReducer, props.initialCards);
     return (
         <div className='flex flex-row flex-wrap gap-[32px]'>
            {cards.map(card =>

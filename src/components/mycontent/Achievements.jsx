@@ -13,33 +13,8 @@ import {
 import {ReactComponent as TrashIcon} from '../icons/trash.svg';
 import {ReactComponent as ExitIcon} from '../icons/exit.svg';
 import {ReactComponent as CupIcon} from '../icons/cup.svg';
-import {ReactComponent as StarIcon} from '../icons/star.svg';
 
 import PageNav from '../PageNav.jsx';
-
-let achievements = [
-    {
-        id: '1',
-        image: 'images/ach-1.png',
-        gradientFrom: '#FFBCA8',
-        gradientTo: '#FF43C4',
-        cups: 13,
-    },
-    {
-        id: '2',
-        image: 'images/ach-2.png',
-        gradientFrom: '#7093FF',
-        gradientTo: '#5ED7CE',
-        cups: 3,
-    },
-    {
-        id: '3',
-        image: 'images/ach-3.png',
-        gradientFrom: '#D96FFF',
-        gradientTo: '#6437FA',
-        cups: 31
-    },
-];
 
 const Card = (props) => {
     const [isModalVisible, setIsModalVisible] = useState(false);
@@ -80,7 +55,7 @@ const Card = (props) => {
             }}
             className='cursor-pointer relative flex items-end justify-end w-[128px] h-[142px] bg-gradient-to-br rounded-[16px] z-10'
         >
-            <div className='absolute w-full h-full flex items-center justify-center'>
+            <div className='absolute w-full h-full flex items-center justify-center pb-[15px]'>
                 <img src={props.image} alt=''/>
             </div>
             <div className='flex items-center justify-center gap-[2px] rounded-br-[16px] rounded-tl-[3px] w-[44px] h-[30px] bg-white'>
@@ -115,7 +90,7 @@ const Card = (props) => {
                                 [staticSide]: '-4px',
                             }}
                             ref={arrowRef} />
-                        <Modal close={() => setIsModalVisible(false)}/>
+                        <Modal close={() => setIsModalVisible(false)}  gameAch={props.gameAch}/>
                         
                     </div>
                 </>   
@@ -143,14 +118,6 @@ const Saved = () => {
         </div>
     );
 };
-
-const gameAch = [
-    { id: 1, name: 'Червь', points: 150, icon: <CupIcon className='text-bronze'/> },
-    { id: 2, name: 'Уж', points: 300, icon: <CupIcon className='text-silver'/> },
-    { id: 3, name: 'Удав', points: 500, icon: <CupIcon className='text-gold'/> },
-    { id: 4, name: 'Питон', points: 1000, icon: <StarIcon/> },
-    { id: 5, name: 'Чёрная мамба', points: 2000, icon: <StarIcon/> },
-];
 
 const GameAchievements = (props) => {
     let curPoints = 150;
@@ -191,7 +158,7 @@ const Modal = (props) => {
                     tab === 'saved'
                         ? <Saved />
                     : tab === 'gameAchievements'
-                        ? gameAch.map(gAch => <GameAchievements key={'gAch:'+gAch.id} {...gAch}/>)
+                        ? props.gameAch.map(gAch => <GameAchievements key={'gAch:'+gAch.id} {...gAch}/>)
                     : null
                 }
             </div>
@@ -200,10 +167,10 @@ const Modal = (props) => {
 
 };
 
-const Achievements = () => {
+const Achievements = (props) => {
     return (
         <div className='flex flex-row flex-wrap gap-[32px]'>
-            {achievements.map((ach, index) => <Card key={'ach:'+index} {...ach}/>)}
+            {props.achievements.map((ach, index) => <Card key={'ach:'+index} {...ach}/>)}
         </div>
     );
 };

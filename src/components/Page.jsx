@@ -10,7 +10,7 @@ const Header = (props) => {
                 <img className='w-[225px] h-[21px]' src='svg/smartchain.svg' alt=''/>
                 { props.content }
             </div>
-            <div onClick={()=>navigate('/profile')} className='flex flex-row items-center gap-[8px] cursor-pointer'>
+            <div onClick={()=>navigate('profile')} className='flex flex-row items-center gap-[8px] cursor-pointer'>
                 <span className='text-white font-medium text-[14px]'>Профиль</span>
                 <img className='w-[7px] h-[4px]' src='svg/downarrow.svg' alt=''/> 
                 <div className='rounded-full bg-dark-blue w-[40px] h-[40px]'></div>

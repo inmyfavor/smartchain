@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import classNames from 'classnames';
 
+import classNames from 'classnames';
 
 const days = ['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'вс'];
 const dates = Array.from({length:31}, (_,i)=>i+1);

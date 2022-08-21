@@ -6,25 +6,13 @@ import 'tippy.js/animations/shift-away-subtle.css';
 import Tippy from '@tippyjs/react';
 import {inlinePositioning} from 'tippy.js';
 
-import { MapContainer, TileLayer, Marker } from 'react-leaflet'
-
-import Page from './Page';
-import HeaderNav from './HeaderNav';
-
 import DateRange from './DateRange';
 
-import L from 'leaflet';
+import {ReactComponent as ExitIcon} from '../../icons/exit.svg';
 
-import {ReactComponent as ExitIcon} from './icons/exit.svg';
+import Map from '../../Map';
 
-import markerIconSvg from './icons/marker.svg';
 import classNames from 'classnames';
-
-const markerIcon = new L.Icon({
-    iconUrl: markerIconSvg,
-    iconRetinaUrl: markerIconSvg,
-    iconSize: [41, 59],
-});
 
 const show = [
     {id: 1, name: 'Реклама сервиса', date: '06/05/2021 - 08/05/2021', wasted: '200/300'},
@@ -37,19 +25,6 @@ const initialModeration = [
     {id: 2, name: 'Реклама магазина', date: '06/05/2021 - 08/05/2021', price: '2000', status: 'checking'},
     {id: 3, name: 'Реклама товаров', date: '06/05/2021 - 08/05/2021', price: '3000', status: 'rejected'},
 ];
-
-function Map(props) {
-    const position = [55.751999, 37.617734];
-
-    return (
-        <MapContainer className="w-full h-full" center={position} zoom={12} scrollWheelZoom={false} attributionControl={false}>
-            <TileLayer url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'/>
-            {props.markers.map(a =>
-                <Marker key={a.id} position={[a.lat, a.lon]} icon={markerIcon}/>
-            )}
-        </MapContainer>
-    );
-}
 
 const Show = (props) => {
     return (
@@ -269,7 +244,7 @@ const area = [
     {id: '1', address: 'г.Москва,ул.Строителей', lat: 55.751999, lon: 37.617734},
     {id: '2', address: 'г.Москва,ул.Житная', lat: 55.751399, lon: 37.417734},
     {id: '3', address: 'г.Москва,ул.Садовая-Сухаревская', lat: 55.756969, lon: 37.6345734},
-    {id: '4', address: 'г.Москва,ул.Спартаковская', lat: 55.75699, lon: 37.6143634},
+    {id: '4', address: 'г.Москва,ул.Спартаковская', number: 3, lat: 55.756969, lon: 37.6143634},
 ];
 
 
@@ -441,31 +416,29 @@ const Advertisement = () => {
     const [files, setFiles] = useState([]);
     const [name, setName] = useState('');
     return (
-        <Page header={<HeaderNav/>}>
-            <div className='flex flex-col mx-[72px] my-[50px] gap-[32px]'>
-                <div className='font-medium text-[24px] text-white'>Ваша реклама</div>
-                <YourAd setModeration={setModeration} moderation={moderation}/>
-                <div className='font-medium text-[24px] text-white mt-[18px]'>Купить рекламу</div>
-                <div className='flex flex-row gap-[72px]'>
-                    <BuyAd name={name} setName={setName} setIsDisabled={setIsDisabled} files={files} setFiles={setFiles}/>
-                    <div className='flex flex-col'>
-                        <div className='text-white text-[16px] mb-[8px]'>Нет материалов для рекламы?</div>
-                        <div className='text-text-gray text-[16px] mb-[16px]'>Закажите материалы у нас</div>
-                        <div className='flex items-center justify-center w-[240px] h-[40px] bg-gradient-to-br from-[#3aed97] to-[#00ffe0] rounded-[8px]'>
-                            <button className='flex items-center justify-center w-[238px] h-[38px] text-white font-medium text-[16px] rounded-[8px] bg-main-blue'>
-                                Заказать
-                            </button>
-                        </div>
+        <div className='flex flex-col mx-[72px] my-[50px] gap-[32px]'>
+            <div className='font-medium text-[24px] text-white'>Ваша реклама</div>
+            <YourAd setModeration={setModeration} moderation={moderation}/>
+            <div className='font-medium text-[24px] text-white mt-[18px]'>Купить рекламу</div>
+            <div className='flex flex-row gap-[72px]'>
+                <BuyAd name={name} setName={setName} setIsDisabled={setIsDisabled} files={files} setFiles={setFiles}/>
+                <div className='flex flex-col'>
+                    <div className='text-white text-[16px] mb-[8px]'>Нет материалов для рекламы?</div>
+                    <div className='text-text-gray text-[16px] mb-[16px]'>Закажите материалы у нас</div>
+                    <div className='flex items-center justify-center w-[240px] h-[40px] bg-gradient-to-br from-[#3aed97] to-[#00ffe0] rounded-[8px]'>
+                        <button className='flex items-center justify-center w-[238px] h-[38px] text-white font-medium text-[16px] rounded-[8px] bg-main-blue'>
+                            Заказать
+                        </button>
                     </div>
                 </div>
-                <Placement addModeration={(m) => {
-                    setModeration([...moderation, {name, files, ...m}]);
-                    setName('');
-                    setFiles([]);
-                    setIsDisabled(true);
-                }} isDisabled={isDisabled} files={files}/>
             </div>
-        </Page>
+            <Placement addModeration={(m) => {
+                setModeration([...moderation, {name, files, ...m}]);
+                setName('');
+                setFiles([]);
+                setIsDisabled(true);
+            }} isDisabled={isDisabled} files={files}/>
+        </div>
     );
 };
 

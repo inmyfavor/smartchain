@@ -1,14 +1,14 @@
 import classNames from 'classnames';
 import React from 'react';
-
 import { useLocation, useNavigate } from 'react-router-dom';
 
 const links = {
-    '/mycontent': 'Мой контент',
-    '/advertisement': 'Реклама'
+    'mycontent': 'Мой контент',
+    'advertisement': 'Купить рекламу',
+    'devices' : 'Мои устройства'
 }
 
-const HeaderNav = () => {
+const HeaderNavOwn = () => {
     let location = useLocation();
     let navigate = useNavigate();
     return (
@@ -17,7 +17,7 @@ const HeaderNav = () => {
                 <button
                     onClick={()=>navigate(key)}
                     className={classNames(
-                        location.pathname === key ? 'text-white' : 'text-text-gray',
+                        location.pathname.split('/').includes(key) ? 'text-white' : 'text-text-gray',
                         'transition-all hover:text-white text-[14px]'
                     )}
                     key={'headnav:'+key}>{value}</button>
@@ -26,4 +26,4 @@ const HeaderNav = () => {
     );
 };
 
-export default HeaderNav;
+export default HeaderNavOwn;
