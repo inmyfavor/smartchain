@@ -26,3 +26,34 @@
   }
 }
 
+.tippy-box {
+  border-radius: 4px;
+  color: white;
+  padding: 16px 14px;
+
+  font-size: 13px;
+  line-height: 16px;
+  font-family: Roboto;
+}
+
+.tippy-box .tippy-content {
+  padding: 0;
+}
+
+.tippy-box[data-theme~='light'] .tippy-arrow {
+  color: #31315C;
+}
+
+.tippy-box[data-theme~='light'] {
+  background: #31315C;
+}
+
+.tippy-box[data-theme~='dark'] .tippy-arrow {
+  color: #2a2b4f;
+}
+
+.tippy-box[data-theme~='dark'] {
+  background: #2a2b4f;
+
+}
+
