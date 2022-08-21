@@ -4,7 +4,7 @@ import AreaSelecting from './AreaSelecting';
 import AreaPlacements from './AreaPlacements';
 import DateRange from './DateRange';
 
-import classNames from 'classnames';
+import {PinkButton} from '../Button';
 
 function formatDate(date) {
     return `${String(date.getDate()).padStart(2, '0')}/${String(date.getMonth()+1).padStart(2, '0')}/${date.getFullYear()}`;
@@ -56,20 +56,19 @@ const Placement = (props) => {
                     </div>
                 </div> 
             }
-            <button 
+            <PinkButton 
                 onClick={()=>props.addModeration({
                     markers: [],
                     id: Math.random(),
                     date, price: '2000', status: 'checking',
                     areaId: placements.length ? placements[0].id : undefined
                 })}
+                className='h-[52px] w-[280px] text-[18px]'
                 disabled={props.isDisabled}
-                className={classNames('h-[52px] w-[280px] rounded-[8px] bg-gradient-to-br text-white font-medium text-[18px]', {
-                    'from-[#363244] to-[#36274f] text-[#a8a9bc]': props.isDisabled,
-                    'from-[#ffe555] to-[#fa5ddb]': !props.isDisabled
-                })}>
-                    Разместить
-            </button>
+                isDisabled={props.isDisabled}
+            >
+                Разместить
+            </PinkButton>
         </div>
     );
 };

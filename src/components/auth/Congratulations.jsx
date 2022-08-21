@@ -1,4 +1,5 @@
 import React from 'react';
+import { PinkOutlineButton } from '../Button';
 
 const Congratulations = (props) => {
     return (
@@ -12,14 +13,11 @@ const Congratulations = (props) => {
                     <br/>
                     с ссылкой и паролем от аккаунта
                 </div>
-                <div className='bg-gradient-to-br from-[#ffe555] to-[#fa5ddb] p-[1px] w-full rounded-[8px]'>
-                        <button 
-                            onClick={() => props.setState('login')}
-                            className='bg-dark-blue w-full py-[13px] 
-                        text-center text-white text-[18px] font-medium rounded-[8px]'>
-                            Хорошо, спасибо
-                    </button>
-                </div>
+                <PinkOutlineButton className='w-full' onClick={() => props.setState('login')}>
+                    <div className='py-[13px]'>
+                        Хорошо, спасибо
+                    </div>
+                </PinkOutlineButton> 
             </div>
         </div>
     );

@@ -1,4 +1,5 @@
 import React, { useState, useMemo, useEffect } from 'react';
+import Input from '../Input';
 
 import Map from '../Map';
 
@@ -19,10 +20,10 @@ const AreaSelecting = (props) => {
             <div className='text-white font-medium text-[18px] mb-[16px]'>Выберите площадку</div>
             <div className='relative mb-[24px]'>
                 <img className='absolute left-[15px] top-[12px]' src='svg/search.svg' alt=''/>
-                <input
+                <Input
                     value={input}
                     onInput={(e) => setInput(e.target.value)}
-                    className='outline-none w-full h-[40px] text-white text-[14px] bg-dark-blue p-[13px] rounded-[8px] pl-[40px] placeholder:text-[rgba(255,255,255,0.5)]' 
+                    style={{height: 40, width: '100%', paddingLeft: 40}} 
                     placeholder='Адрес / номер скамейки'
                 />
             </div>

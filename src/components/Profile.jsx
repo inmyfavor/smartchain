@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import PageNav from './PageNav.jsx';
 import Input from './Input.jsx';
+import { PinkButton } from './Button.jsx';
 
 const tabs = {
     'profile': 'Профиль',
@@ -17,7 +18,7 @@ const Modal = (props) => {
                 <Input style={{width: '50%'}} placeholder={props.placeholder_3}/>
                 <Input style={{width: '50%'}} placeholder={props.placeholder_4}/>
             </div>
-        <button className='rounded-[8px] w-1/4 h-[40px] bg-gradient-to-br from-[#ffe555] to-[#fa5ddb]'></button>
+        <PinkButton className='w-1/4 h-[40px]'/>
         </div>
     );
 };

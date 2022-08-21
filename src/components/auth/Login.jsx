@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Input from '../Input';
+import {PinkButton} from '../Button';
 
 const Login = (props) => {
     return (
@@ -18,10 +19,7 @@ const Login = (props) => {
                         <Input placeholder='Логин'/>
                         <Input type='phone' placeholder='Пароль'/>
                     </div>
-                    <button type='submit' className='bg-gradient-to-br from-[#ffe555] to-[#fa5ddb] w-full py-[13px] 
-                    text-center mt-[24px] text-white text-[18px] font-medium rounded-[8px]'>
-                        Войти
-                    </button>
+                    <PinkButton type='submit' className='w-full p-[13px] mt-[24px] text-[18px]'>Войти</PinkButton>
                 </form>
                 <div className='mb-[16px]'></div>
                 <button className='text-white text-[14px] opacity-[0.5] transition-all hover:opacity-[1]'>Забыли пароль?</button>

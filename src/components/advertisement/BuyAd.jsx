@@ -1,6 +1,8 @@
 import React, { useRef, useEffect } from 'react';
 
 import {ReactComponent as ExitIcon} from '../icons/exit.svg';
+import Input from '../Input';
+import {PinkButton} from '../Button';
 
 const BuyAd = (props) => {
     const input = useRef(null);
@@ -17,10 +19,10 @@ const BuyAd = (props) => {
                 props.files.length === 0 
                     ? <div className='text-[16px] text-text-gray mb-[24px]'>Загрузите материалы и отправьте их на модерацию</div>
                 : <div className='flex flex-col'>
-                    <input 
+                    <Input
                         onInput={(e)=>props.setName(e.target.value)}
                         value={props.name}
-                        className='w-full h-[40px] outline-none text-white text-[14px] bg-dark-blue p-[13px] rounded-[8px] placeholder:text-[rgba(255,255,255,0.5)] mb-[16px]'
+                        style={{marginBottom: 16, height: 40}}
                         placeholder='Введите название'/>
                     <div className='flex flex-row mb-[16px]'>
                         <div>
@@ -60,14 +62,15 @@ const BuyAd = (props) => {
                             props.setFiles([...props.files, ...input.current.files]);
                             input.current.value = null;
                         }}
-                        ref={input} className='hidden' type='file' accept="image/gif, image/jpeg" multiple/>
+                        ref={input} className='hidden outline-none' type='file' accept="image/gif, image/jpeg" multiple/>
                 </button>
-                <button 
+                <PinkButton
                     disabled={props.files.length===0}
                     onClick={()=>props.setIsDisabled?.(props.files.length===0)}
-                    className='h-[40px] w-[176px] rounded-[8px] bg-gradient-to-br from-[#ffe555] to-[#fa5ddb] text-white text-[16px] font-medium'>
-                        {props.name.length === 0 ? 'Отправить' : 'Сохранить'}
-                </button>
+                    className='h-[40px] w-[176px] text-[16px]'
+                >
+                    {props.name.length === 0 ? 'Отправить' : 'Сохранить'}
+                </PinkButton>
                 <div className='flex flex-col'>
                     <div className='text-[12px] text-white'>Форматы: jpeg, gif.</div>
                     <div className='text-[12px] text-white underline'>Правила</div>

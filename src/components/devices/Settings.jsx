@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import Map from '../Map';
 
 import { deviceInfo } from '../owner/Data';
+import { BlueButton } from '../Button';
 
 const Check = (props) => {
     const [checked, setChecked] = useState(false);
@@ -73,10 +74,9 @@ const Settings = (props) => {
                 </button>
             </div>
             <div className='text-[14px] text-text-gray'>10 фотографий</div>
-            <button className='absolute left-[16px] bottom-[16px] w-[280px] h-[52px] text-center 
-            bg-gradient-to-br from-[#7093ff] to-[#5ed7ce] rounded-[8px] text-white font-medium text-[18px]'>
+            <BlueButton className='absolute left-[16px] bottom-[16px] w-[280px] h-[52px] text-[18px]'>
                 Сохранить
-            </button>
+            </BlueButton>
             <button 
                 onClick={()=>props.setPanel([])}
                 className='absolute right-[19px] bottom-[16px] text-[16px] text-text-gray opacity-[0.5]'>

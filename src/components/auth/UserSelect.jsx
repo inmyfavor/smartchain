@@ -4,6 +4,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import classNames from 'classnames';
 
 import { useAuth } from '../../auth';
+import {PinkButton} from '../Button';
 
 
 const User = (props) => {
@@ -50,13 +51,13 @@ const UserSelect = () => {
                 </div>
                 <div className='mb-[24px]'></div>
                 <div className='flex justify-center'>
-                    <button
+                    <PinkButton
                         onClick={handleSubmit}
-                        type='submit' className='bg-gradient-to-br from-[#ffe555] to-[#fa5ddb] py-[8px] 
-                        text-center w-[176px] mt-[24px] text-white text-[18px] font-medium rounded-[8px]'
+                        type='submit'
+                        className='w-[176px] p-[8px] mt-[24px] text-[18px]'
                     >
                         Выбрать
-                    </button>
+                    </PinkButton>
                 </div>
             </div>
         </div>

@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Input from '../Input';
+import {PinkButton} from '../Button';
 
 const Register = (props) => {
     return (
@@ -19,10 +20,7 @@ const Register = (props) => {
                         <Input type='phone' placeholder='Номер телефона'/>
                         <Input type='email' placeholder='Почта'/>
                     </div>
-                    <button type='submit' className='bg-gradient-to-br from-[#ffe555] to-[#fa5ddb] w-full py-[13px] 
-                    text-center mt-[24px] text-white text-[18px] font-medium rounded-[8px]'>
-                        Зарегистрироваться
-                    </button>
+                    <PinkButton type='submit' className='w-full p-[13px] mt-[24px] text-[18px]'>Зарегистрироваться</PinkButton>
                 </form>
                 <div className='mb-[24px]'></div>
                 <div className='flex flex-row items-center gap-[16px]'>

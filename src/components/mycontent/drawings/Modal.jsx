@@ -5,7 +5,7 @@ import Info from './Info';
 
 const Modal = (props) => {
     return props.modal !== null
-        ? <div className='absolute w-full h-full top-0 left-0 flex justify-center items-center bg-[rgba(67,68,111,0.7)]'>
+        ? <div className='fixed z-[10] w-full h-full top-0 left-0 flex justify-center items-center bg-[rgba(67,68,111,0.7)]'>
                 <div onClick={props.close}  className='absolute w-full h-full z-[0]'></div>
                 {
                     props.modal === 'trash'

@@ -8,6 +8,7 @@ import { initialModeration } from '../stranger/Data';
 import YourAd from './YourAd';
 import BuyAd from './BuyAd';
 import Placement from './Placement';
+import { GreenOutlineButton } from '../Button';
 
 const Advertisement = () => {
     const [moderation, setModeration] = useState(initialModeration);
@@ -24,11 +25,7 @@ const Advertisement = () => {
                 <div className='flex flex-col'>
                     <div className='text-white text-[16px] mb-[8px]'>Нет материалов для рекламы?</div>
                     <div className='text-text-gray text-[16px] mb-[16px]'>Закажите материалы у нас</div>
-                    <div className='flex items-center justify-center w-[240px] h-[40px] bg-gradient-to-br from-[#3aed97] to-[#00ffe0] rounded-[8px]'>
-                        <button className='flex items-center justify-center w-[238px] h-[38px] text-white font-medium text-[16px] rounded-[8px] bg-main-blue'>
-                            Заказать
-                        </button>
-                    </div>
+                    <GreenOutlineButton className='w-[240px] h-[40px]'>Заказать</GreenOutlineButton>
                 </div>
             </div>
             <Placement addModeration={(m) => {
