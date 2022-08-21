@@ -13,3 +13,15 @@
   font-weight: 500;
   src: url('../public/fonts/Roboto-Medium.ttf');
 }
+
+
+@keyframes flow {
+  0%, 100% {
+    transform: translateY(-10%);
+    animation-timing-function: ease-in-out;
+  }
+  50% {
+    transform: translateY(0);
+    animation-timing-function: ease-in-out;
+  }
+}

@@ -1,5 +1,5 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Index from './auth/Index.jsx';
+import { HashRouter as Router, Route, Routes } from 'react-router-dom';
+import Index from './components/auth/Index.jsx';
 
 const AppRoutes = () => {
     return (
