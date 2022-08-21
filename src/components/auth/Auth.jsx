@@ -33,7 +33,7 @@ const Modal = () => {
     );
 };
 
-const Index = () => {
+const Auth = () => {
     return (
        <Page header={<HeaderDescr/>}>
             <Background/>
@@ -42,4 +42,4 @@ const Index = () => {
     );
 };
 
-export default Index;
+export default Auth;

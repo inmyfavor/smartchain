@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 
 import classNames from 'classnames';
 
@@ -22,6 +24,7 @@ const User = (props) => {
 
 const UserSelect = () => {
     const [selectedUser, setSelectedUser] = useState(null);
+    const navigate = useNavigate();
     return (
         <div className='absolute flex w-full h-full justify-center items-center z-[1]'>
             <div className='flex flex-col min-h-[200px] w-[448px] rounded-[16px] shadow-md bg-header-blue p-[32px]'>
@@ -33,8 +36,11 @@ const UserSelect = () => {
                 </div>
                 <div className='mb-[24px]'></div>
                 <div className='flex justify-center'>
-                    <button type='submit' className='bg-gradient-to-br from-[#ffe555] to-[#fa5ddb] py-[8px] 
-                        text-center w-[176px] mt-[24px] text-white text-[18px] font-medium rounded-[8px]'>
+                    <button
+                        onClick={() => navigate('/mycontent')}
+                        type='submit' className='bg-gradient-to-br from-[#ffe555] to-[#fa5ddb] py-[8px] 
+                        text-center w-[176px] mt-[24px] text-white text-[18px] font-medium rounded-[8px]'
+                    >
                         Выбрать
                     </button>
                 </div>

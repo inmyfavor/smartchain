@@ -1,3 +1,5 @@
+import React from "react";
+
 const Header = (props) => {
     return (
         <header className='flex flex-row items-center justify-between bg-header-blue h-[70px] px-[72px] py-[15px]'>
@@ -16,7 +18,7 @@ const Header = (props) => {
 
 const Body = (props) => {
     return (
-        <div className='grow bg-main-blue flex flex-col'>
+        <div className='grow relative bg-main-blue flex flex-col'>
             <div className='grow relative overflow-hidden'>
                 {props.children}
             </div>
