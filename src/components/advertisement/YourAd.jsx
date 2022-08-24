@@ -40,8 +40,10 @@ const YourAd = (props) => {
             </div>
             <div className='w-full xl:w-1/3 flex flex-col gap-[16px]'>
                 <div className='font-medium text-[18px] text-white'>Устройства на карте</div>
-                <div className='w-full h-full min-h-[300px] rounded-[8px] bg-dark-blue overflow-hidden'>
-                    <Map setMap={setMap} markers={markers}/>
+                <div className='w-full h-full min-h-[300px] rounded-[8px] bg-dark-blue overflow-hidden relative'>
+                    <div className='w-full h-full absolute'>
+                        <Map setMap={setMap} markers={markers}/>
+                    </div>
                 </div>
             </div>
         </div>
