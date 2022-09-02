@@ -34,9 +34,12 @@ const YourAd = (props) => {
                     {show.map(sh => <Show setCenter={setCenter} key={'sh:'+sh.id} {...sh}/>)}
                 </div>
                 <div className='font-medium text-[18px] text-white'>На проверке</div>
-                <div className='flex flex-col gap-[16px] w-full min-h-[40px] bg-dark-blue rounded-[8px] p-[8px]'>
-                    {props.moderation.map((mod, index) => <Moderation setCenter={setCenter} key={'mod:'+mod.id} {...mod} index={index+1} remove={removeModeration}/>)}
-                </div>
+                { props.moderation.length !== 0 &&
+                    <div className='flex flex-col gap-[16px] w-full min-h-[40px] bg-dark-blue rounded-[8px] p-[8px]'>
+                        {props.moderation.map((mod, index) => 
+                            <Moderation setCenter={setCenter} key={'mod:'+mod.id} {...mod} index={index+1} remove={removeModeration}/>)}
+                    </div>
+                }
             </div>
             <div className='w-full xl:w-1/3 flex flex-col gap-[16px]'>
                 <div className='font-medium text-[18px] text-white'>Устройства на карте</div>

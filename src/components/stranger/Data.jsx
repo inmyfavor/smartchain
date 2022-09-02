@@ -111,18 +111,22 @@ export const area = [
 ];
 
 export const show = [
-    {id: 1, name: 'Реклама сервиса', date: '06/05/2021 - 08/05/2021', wasted: '200/300', areaId: '1' },
-    {id: 2, name: 'Реклама магазина', date: '06/05/2021 - 08/05/2021', wasted: '1000/2000', areaId: '2'},
-    {id: 3, name: 'Реклама товаров', date: '06/05/2021 - 08/05/2021', wasted: '70/3000', areaId: '3'},
+    {id: 1, name: 'Реклама сервиса', date: '06/05/2021 - 08/05/2021', start: '05/06/2021', end: '05/08/2021', wasted: '200/300', areaId: '1' },
+    {id: 2, name: 'Реклама магазина', date: '06/05/2021 - 08/06/2021', start: '05/06/2021', end: '06/08/2021', wasted: '1000/2000', areaId: '2'},
+    {id: 3, name: 'Реклама товаров', date: '06/05/2021 - 12/05/2021', start: '05/06/2021', end: '05/12/2021', wasted: '70/3000', areaId: '3'},
 ];
 
 export const initialModeration = [
-    {id: 1, name: 'Реклама сервиса', date: '06/05/2021 - 08/05/2021', price: '300', status: 'accepted', areaId: '1'},
-    {id: 2, name: 'Реклама магазина', date: '06/05/2021 - 08/05/2021', price: '2000', status: 'checking', areaId: '2'},
-    {id: 3, name: 'Реклама товаров', date: '06/05/2021 - 08/05/2021', price: '3000', status: 'rejected', areaId: '3'},
+    {id: 1, name: 'Реклама сервиса', date: '06/05/2021 - 08/05/2021', start: '05/06/2021', end: '05/08/2021', price: '300', status: 'accepted', areaId: '1'},
+    {id: 2, name: 'Реклама магазина', date: '06/05/2021 - 22/05/2021', start: '05/06/2021', end: '05/22/2021', price: '2000', status: 'checking', areaId: '2'},
+    {id: 3, name: 'Реклама товаров', date: '08/08/2021 - 24/08/2021', start: '08/08/2021', end: '08/24/2021', price: '3000', status: 'rejected', areaId: '3'},
 ];
 
 export const links = {
     '/': 'Мой контент',
     '/advertisement': 'Реклама'
-}
+};
+
+export const savedStr = [
+    { id: '1', level: '3', date: '1/04/2021 18:23', address: 'г.Москва, ул.Сталеваров, 22' },
+];

@@ -88,7 +88,7 @@ const Card = (props) => {
                                 [staticSide]: '-4px',
                             }}
                             ref={arrowRef} />
-                        <Modal close={() => setIsModalVisible(false)}  gameAch={props.gameAch}/>
+                        <Modal close={() => setIsModalVisible(false)} gameAch={props.gameAch} saved={props.saved}/>
                         
                     </div>
                 </>   

@@ -4,17 +4,33 @@ import {ReactComponent as ExitIcon} from '../icons/exit.svg';
 
 import Tippy from '@tippyjs/react';
 import {inlinePositioning} from 'tippy.js';
+import ModalMonth from './ModalMonth';
 
 const Moderation = (props) => {
     return (
-        <div className='flex flex-row'>
+        <div className='flex flex-row items-center'>
             <div className='text-white text-[16px] w-1/3'>{props.index}. {props.name}</div>
             <img className='mr-[9px]' src='svg/img.svg' alt=''/> 
-            <div className='text-text-blue font-medium text-[14px] w-1/3'>{props.date}</div>
+            <div className='text-text-blue font-medium text-[14px] w-1/3'>
+                <Tippy
+                    interactive
+                    content={<ModalMonth start={new Date(props.start)} end={new Date(props.end)}/>}
+                    theme="dark"
+                    arrow={true}
+                    placement="bottom"
+                    animation="shift-away-subtle"
+                    duration={[450, 125]}
+                    inlinePositioning={true}
+                    plugins={[inlinePositioning]}
+                >
+                    <span>{props.date}</span>
+                </Tippy>
+            </div>
             <div className='font-medium text-white text-[14px] w-1/6'>{props.price} руб</div>
-            <div className='w-1/6 flex flex-row justify-end'>
+            <div className='w-1/6 flex flex-row justify-end cursor-pointer'>
             { 
                     <Tippy
+                        interactive
                         content={
                             props.status === 'rejected'
                                 ? <div className='flex flex-col'>

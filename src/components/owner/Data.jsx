@@ -134,4 +134,8 @@ export const links = {
     '/': 'Мой контент',
     '/advertisement': 'Купить рекламу',
     '/devices' : 'Мои устройства'
-}
+};
+
+export const savedOwn = [
+    { id: '1', level: '3', date: '1/04/2021 18:23', address: 'г.Москва, ул.Молостовых, 14А' },
+];

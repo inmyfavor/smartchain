@@ -8,6 +8,9 @@ import { initialCardsStr, achievementsStr } from '../stranger/Data';
 import { initialCardsOwn, achievementsOwn } from '../owner/Data';
 import { useAuth } from '../../auth.js';
 
+import { savedOwn } from '../owner/Data';
+import { savedStr } from '../stranger/Data';
+
 const tabs = {
     'drawings': 'Мои рисунки',
     'achievements': 'Мои игровые достижения'
@@ -17,6 +20,7 @@ const MyContent = () => {
     const auth = useAuth();
     const initialCards = auth.user === 'owner' ? initialCardsOwn : initialCardsStr;
     const achievements = auth.user === 'owner' ? achievementsOwn : achievementsStr;
+    const saved = auth.user === 'owner' ? savedOwn : savedStr;
     const [tab, setTab] = useState('drawings');
     return (
         <div className='mx-[72px] my-[50px]'>
@@ -27,7 +31,7 @@ const MyContent = () => {
                 tab === 'drawings'
                     ? <Drawings initialCards={initialCards}/>
                 : tab === 'achievements'
-                    ? <Achievements achievements={achievements}/>
+                    ? <Achievements achievements={achievements} saved={saved}/>
                 : null
             }
         </div>
