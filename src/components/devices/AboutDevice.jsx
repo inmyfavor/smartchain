@@ -70,7 +70,7 @@ const Wait = (props) => {
 
 const AboutDevice = (props) => {
     return (
-        <div className='relative flex flex-col w-full rounded-[16px] bg-header-blue px-[16px] py-[24px]'>
+        <div className='relative flex flex-col w-full rounded-[16px] bg-header-blue px-[16px] py-[24px] mt-[8px]'>
             <div className='text-white text-[18px] font-medium mb-[16px]'>Статистика скамейки</div>
             <div className='flex flex-row mb-[24px] gap-[16px]'>
                 <div className='w-3/5 h-[252px] bg-dark-blue rounded-[8px]'></div>
@@ -103,6 +103,7 @@ const AboutDevice = (props) => {
                 </div>
                 <div className='xl:w-2/5 xl:ml-[16px]'></div>
             </div>
+            <div className='min:h-[30px] min:w-full min:bg-light-blue'></div>
             <button 
                 onClick={()=>props.setPanel([])}
                 className='absolute right-[19px] bottom-[16px] text-[16px] text-text-gray opacity-[0.5]'>

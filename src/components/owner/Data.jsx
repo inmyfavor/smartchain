@@ -111,10 +111,14 @@ export const markers = [
 ]
 
 export const deviceInfo = [
-    { id: '1', price: '1000', version: 2, update: 3, markers: [ {lat: 55.751999, lon: 37.717734} ], address: 'г.Москва, ул.Молостовых, 14А' },
-    { id: '2', price: '3000', version: 2, update: 3, markers: [ {lat: 55.951997, lon: 37.617734} ], address: 'г.Москва, ул.Сталеваров, 22' },
-    { id: '3', price: '6000', version: 2, update: 3, markers: [ {lat: 55.751999, lon: 37.917634} ], address: 'г.Москва, ул.Шарикоподшипниковская, 13ст1' },
-    { id: '4', price: '2000', version: 2, update: 3, markers: [ {lat: 55.851989, lon: 37.617624} ], address: 'г.Москва, ул.Удальцова, 47' },
+    { id: '1', name: 'Скамейка', income: '1000', ad: 5, application: 3, markers: [ {lat: 55.751974, lon: 37.545303} ], 
+    address: 'г.Москва, Краснопресненская наб., 14' },
+    { id: '2', name: 'Урна', income: '3000', ad: 15, application: 10, markers: [ {lat: 55.751974, lon: 37.545303} ], 
+    address: 'г.Москва, Краснопресненская наб., 14' },
+    { id: '3', name: 'Столб', income: '0', ad: 0, application: 0, markers: [ {lat: 55.751974, lon: 37.545303} ], 
+    address: 'г.Москва, Краснопресненская наб., 14', filter: 'brightness-[.6]' },
+    { id: '4', name: 'Дорожный знак', income: '0', ad: 0, application: 0, markers: [ {lat: 55.751974, lon: 37.545303} ], 
+    address: 'г.Москва, Краснопресненская наб., 14', filter: 'brightness-[.6]' },
 ];
 
 export const show = [
@@ -131,9 +135,9 @@ export const wait = [
 ];
 
 export const links = {
+    '/devices' : 'Мои устройства',
     '/': 'Мой контент',
     '/advertisement': 'Купить рекламу',
-    '/devices' : 'Мои устройства'
 };
 
 export const savedOwn = [

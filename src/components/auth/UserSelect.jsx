@@ -16,7 +16,7 @@ const User = (props) => {
             <div className={classNames('p-[4px] rounded-full transition-all', {
                 'bg-gradient-to-br from-[#ffe555] to-[#fa5ddb]': props.name === props.selectedUser
             })}>
-                <div className='rounded-full bg-dark-blue w-[120px] h-[120px]'></div>
+                <div className='flex justify-center items-center rounded-full bg-dark-blue w-[120px] h-[120px]'>{props.icon}</div>
             </div>
             <div className='mb-[16px]'></div>
             <div className='text-white text-[18px] font-medium text-center'>{props.name}</div>
@@ -26,17 +26,18 @@ const User = (props) => {
 
 const UserSelect = () => {
     const navigate = useNavigate();
-    const location = useLocation();
+    // чтобы сохранить страницу с которой пришел
+    // const location = useLocation();
+    // let from = location.state?.from?.pathname || "/";
     const auth = useAuth();
-
-    const from = location.state?.from?.pathname || "/";
 
     function handleSubmit(event) {
         event.preventDefault();
 
         const user = selectedUser === 'Прохожий' ? 'stranger' : 'owner'
         auth.signin(user);
-        navigate(from, { replace: true });
+        const to = selectedUser === 'Прохожий' ? '/' : '/devices';
+        navigate(to, { replace: true });
     }
 
     const [selectedUser, setSelectedUser] = useState(null);
@@ -46,8 +47,8 @@ const UserSelect = () => {
                 <div className='text-white text-[18px] font-medium text-center'>Выбор пользователя</div>
                 <div className='mb-[38px]'></div>
                 <div className='flex justify-center gap-[90px]'>
-                    <User name='Прохожий' selectedUser={selectedUser} setSelectedUser={setSelectedUser}/>
-                    <User name='Владелец' selectedUser={selectedUser} setSelectedUser={setSelectedUser}/>                    
+                    <User name='Прохожий' icon={<img src='images/user.png' alt='Пользователь' className='h-[70px]'/>} selectedUser={selectedUser} setSelectedUser={setSelectedUser}/>
+                    <User name='Владелец' icon={<img src='images/company.png' alt='Владелец' className='h-[60px]'/>} selectedUser={selectedUser} setSelectedUser={setSelectedUser}/>                    
                 </div>
                 <div className='mb-[24px]'></div>
                 <div className='flex justify-center'>

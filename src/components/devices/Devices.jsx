@@ -9,15 +9,14 @@ import { GreenButton } from '../Button';
 const Devices = () => {
     return (
         <div className='flex flex-col py-[120px] px-[72px]'>
-            <div className='font-medium text-white text-[24px] mb-[24px]'>Ваши устройства</div>
-            <div className='flex flex-col gap-[10px]'>
+            <div className='flex items-center'>
+                <div className='font-medium text-white text-[24px]'>Мои устройства</div>
+                <GreenButton className='relative py-[8px] px-[8px] ml-[24px]'>
+                    <img className='w-[16px] h-[16px]' src='svg/plus.svg' alt=''/>
+                </GreenButton>
+            </div>
+            <div className='flex flex-col gap-[10px] mt-[24px]'>
                 {deviceInfo.map(device => <Device key={'device:'+device.id} {...device}/>)}
-                <div className='flex flex-row-reverse w-full xl:w-1/2'>
-                    <GreenButton className='relative w-[210px] mt-[14px] py-[10px] pr-[8px] pl-[40px] text-[14px]'>
-                        <img className='w-[20px] h-[20px] absolute left-[10px] top-[10px]' src='svg/plus.svg' alt=''/>
-                        Добавить устройство
-                    </GreenButton>
-                </div>
             </div>
         </div>
     );

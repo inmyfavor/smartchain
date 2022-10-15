@@ -2,7 +2,10 @@ import React from "react";
 
 import { useNavigate } from 'react-router-dom';
 
+import { useAuth } from '../auth';
+
 const Header = (props) => {
+    const auth = useAuth();
     let navigate = useNavigate();
     return (
         <header className='flex flex-row items-center justify-between bg-header-blue h-[70px] px-[72px] py-[15px]'>
@@ -13,7 +16,15 @@ const Header = (props) => {
             <div onClick={()=>navigate('/profile')} className='flex flex-row items-center gap-[8px] cursor-pointer'>
                 <span className='text-white font-medium text-[14px]'>Профиль</span>
                 <img className='w-[7px] h-[4px]' src='svg/downarrow.svg' alt=''/> 
-                <div className='rounded-full bg-dark-blue w-[40px] h-[40px]'></div>
+                <div className='flex justify-center items-center rounded-full bg-dark-blue w-[40px] h-[40px]'>
+                    {
+                        auth.user === 'owner' 
+                            ? <img src='images/ownerProfile.png' alt=''/>
+                        : auth.user === 'stranger'
+                            ? <img src='images/userProfile.png' alt=''/>
+                        : <img src='images/user.png' alt='' className="h-[28px]"/>
+                    }
+                </div>
             </div>
         </header>
     );

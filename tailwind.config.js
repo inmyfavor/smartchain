@@ -17,6 +17,9 @@ module.exports = {
       fontFamily: {
         roboto: ['Roboto', 'sans-serif']
       },
+      screens: {
+        'min': { 'raw': '(max-width: 1280px)' },
+      },
     },
   },
   plugins: [],

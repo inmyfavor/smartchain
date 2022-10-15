@@ -15,7 +15,7 @@ const markerIcon = new L.Icon({
 function Map(props) {
     const setMap = props.setMap ?? (() => {});
     return (
-        <MapContainer className="w-full h-full" ref={setMap} center={[55.751999, 37.617734]} zoom={12} scrollWheelZoom={false} attributionControl={false}>
+        <MapContainer className="w-full h-full" ref={setMap} center={[55.751974, 37.545303]} zoom={12} scrollWheelZoom={false} attributionControl={false}>
             <TileLayer url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'/>
             {props.markers.map(a =>
                 <Marker key={'marker:'+a.id} position={[a.lat, a.lon]} icon={markerIcon}/>

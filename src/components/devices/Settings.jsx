@@ -9,6 +9,8 @@ import Map from '../Map';
 import { deviceInfo } from '../owner/Data';
 import { BlueButton } from '../Button';
 
+import { Status } from './Device';
+
 const Check = (props) => {
     const [checked, setChecked] = useState(false);
     return (
@@ -18,10 +20,10 @@ const Check = (props) => {
                 <div
                     onClick={()=>setChecked(!checked)} 
                     className={classNames(
-                        'relative h-[20px] w-[36px] rounded-[16px]',
-                        'before:content-[""] before:h-[16px] before:w-[16px] before:bg-white before:rounded-[16px] before:absolute before:cursor-pointer', { 
-                        'bg-gradient-to-br from-[#ffe555] to-[#fa5ddb] before:top-[2px] before:right-[2px]' : checked,
-                        'bg-[#bbbbc2] before:top-[2px] before:left-[2px]' : !checked 
+                        'relative h-[20px] w-[36px] rounded-[16px] before:transition-all',
+                        'before:content-[""] before:translate-x-[2px] before:top-[2px] before:h-[16px] before:w-[16px] before:bg-white before:rounded-[16px] before:absolute before:cursor-pointer', { 
+                        'bg-gradient-to-br from-[#ffe555] to-[#fa5ddb] before:translate-x-[18px]' : checked,
+                        'bg-[#bbbbc2]' : !checked 
                     })}>
                 </div>
             </div>
@@ -33,7 +35,7 @@ const Check = (props) => {
 const Settings = (props) => {
     const navigate = useNavigate();
     return (
-        <div className='relative w-full xl:w-1/2 min-h-[900px] flex flex-col bg-header-blue rounded-[16px] pt-[24px] pb-[92px] px-[16px]'>
+        <div className='relative w-full xl:w-1/2 min-h-[900px] flex flex-col bg-header-blue rounded-[16px] pt-[24px] pb-[92px] px-[16px] mt-[8px]'>
             <div className='text-white text-[18px] font-medium mb-[24px]'>Настройки устройства №{props.number}</div>
             <div className='flex flex-row gap-[22px] mb-[32px]'>
                 <div className='w-1/2 h-[180px] rounded-[8px] overflow-hidden'><Map markers={deviceInfo[props.id].markers}/></div>
@@ -47,9 +49,7 @@ const Settings = (props) => {
                     <div className='font-medium text-text-blue text-[14px] mb-[24px]'>ОБНОВИТЬ</div>
                     <div className='flex flex-row items-center gap-[8px]'>
                         <div className='font-medium text-white text-[16px]'>Статус:</div>
-                        <div className='flex justify-center items-center bg-main-blue h-[16px] w-[16px] rounded-[16px]'>
-                            <div className='w-[8px] h-[8px] rounded-[8px] bg-gradient-to-br from-[#6fff2c] to-[#29eee7]'></div>
-                        </div>
+                        <Status gradient='from-[#6fff2c] to-[#29eee7]'/>
                     </div>
                 </div>
             </div>
