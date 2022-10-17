@@ -13,7 +13,7 @@ const HeaderNav = (props) => {
     let location = useLocation();
     let navigate = useNavigate();
     return (
-        <div className='flex flex-row gap-[60px] ml-[71px]'>
+        <div className='flex flex-row lg:gap-[60px] lg:ml-[71px] md:gap-[40px] md:ml-[41px]'>
             {Object.entries(props.links).map(([key, value]) =>
                 <button
                     onClick={()=>navigate(key)}

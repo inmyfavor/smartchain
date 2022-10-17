@@ -10,7 +10,7 @@ import {PinkButton} from '../Button';
 const User = (props) => {
     return (
         <div
-            className='cursor-pointer'
+            className='cursor-pointer select-none'
             onClick={() => props.setSelectedUser(props.name)}
         >
             <div className={classNames('p-[4px] rounded-full transition-all', {

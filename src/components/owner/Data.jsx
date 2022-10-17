@@ -112,13 +112,13 @@ export const markers = [
 
 export const deviceInfo = [
     { id: '1', name: 'Скамейка', income: '1000', ad: 5, application: 3, markers: [ {lat: 55.751974, lon: 37.545303} ], 
-    address: 'г.Москва, Краснопресненская наб., 14' },
+    address: 'г.Москва, Краснопресненская наб., 14', version: 2 },
     { id: '2', name: 'Урна', income: '3000', ad: 15, application: 10, markers: [ {lat: 55.751974, lon: 37.545303} ], 
-    address: 'г.Москва, Краснопресненская наб., 14' },
+    address: 'г.Москва, Краснопресненская наб., 14', version: 2, leftWidth: '50%', rightWidth: '75%' },
     { id: '3', name: 'Столб', income: '0', ad: 0, application: 0, markers: [ {lat: 55.751974, lon: 37.545303} ], 
-    address: 'г.Москва, Краснопресненская наб., 14', filter: 'brightness-[.6]' },
+    address: 'г.Москва, Краснопресненская наб., 14', version: 2, filter: 'brightness-[.6]' },
     { id: '4', name: 'Дорожный знак', income: '0', ad: 0, application: 0, markers: [ {lat: 55.751974, lon: 37.545303} ], 
-    address: 'г.Москва, Краснопресненская наб., 14', filter: 'brightness-[.6]' },
+    address: 'г.Москва, Краснопресненская наб., 14', version: 2, filter: 'brightness-[.6]' },
 ];
 
 export const show = [

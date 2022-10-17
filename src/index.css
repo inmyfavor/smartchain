@@ -54,6 +54,14 @@
 
 .tippy-box[data-theme~='dark'] {
   background: #2a2b4f;
-
 }
 
+.tippy-box[data-theme~='dark-blue'] {
+  background: #202041;
+}
+
+.tippy-box[data-theme~='dark-blue'] .tippy-arrow {
+  color: #202041;
+}
+
+* { -webkit-tap-highlight-color: transparent; }

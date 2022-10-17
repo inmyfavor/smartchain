@@ -8,7 +8,7 @@ const ModalMonth = (props) => {
     return (
         <div className='relative flex flex-row py-[16px] ml-[6px]'>
             <BackArrow date={date} setDate={setDate}/>
-            <Month date={date} start={props.start} end={props.end}/>
+            <Month date={date} start={props.start} end={props.end} disabled/>
             <ForwardArrow date={date} setDate={setDate}/>
         </div>
     );

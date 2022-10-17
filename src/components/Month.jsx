@@ -12,7 +12,7 @@ const dayNames = ['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'вс'];
 const dates = Array.from({length:31}, (_,i)=>i+1);
 
 const Month = (props) => {
-    const initialDate = new Date(`${props.date.getFullYear()}/${props.date.getMonth()+1}`);
+    const initialDate = new Date(props.date.getFullYear(), props.date.getMonth());
     const month = months[initialDate.getMonth()];
     const days = new Date(initialDate.getFullYear(), initialDate.getMonth()+1, 0).getDate();
     const firstDay = getFirstDay(initialDate);
@@ -52,6 +52,7 @@ const Month = (props) => {
                                     props.setEnd(date);
                                 }
                             }}
+                            disabled={props.disabled}
                             key={'day:'+date.getDate()}
                             className={classNames('text-white text-[14px] w-[32px] h-[32px] text-center relative', {
                                 'border border-text-blue text-text-blue': +date === +props.start || +date === +props.end

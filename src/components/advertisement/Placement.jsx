@@ -30,7 +30,7 @@ const Dates = (props) => {
 
 const Placement = (props) => {
     const [placements, setPlacements] = useState([]);
-    let date = 'Не назначено';
+    let date = 'Не назначено', start = '', end = '';
     return (
         <div className='flex flex-col gap-[24px]'>
             {
@@ -42,7 +42,10 @@ const Placement = (props) => {
                                 date = 'Не назначено';
                             } else if (+val[0] === val[1] || val[1] === null) {
                                 date = formatDate(val[0]);
+                                start = val[0];
                             } else {
+                                start = val[0];
+                                end = val[1];
                                 date = `${formatDate(val[0])} - ${formatDate(val[1])}`
                             }
                         }}/>
@@ -61,6 +64,7 @@ const Placement = (props) => {
                     markers: [],
                     id: Math.random(),
                     date, price: '2000', status: 'checking',
+                    start, end,
                     areaId: placements.length ? placements[0].id : undefined
                 })}
                 className='h-[52px] w-[280px] text-[18px]'

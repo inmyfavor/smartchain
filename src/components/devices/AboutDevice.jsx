@@ -70,7 +70,7 @@ const Wait = (props) => {
 
 const AboutDevice = (props) => {
     return (
-        <div className='relative flex flex-col w-full rounded-[16px] bg-header-blue px-[16px] py-[24px] mt-[8px]'>
+        <div className='relative flex flex-col w-full xl:w-3/4 rounded-[16px] bg-header-blue px-[16px] py-[24px] mt-[8px]'>
             <div className='text-white text-[18px] font-medium mb-[16px]'>Статистика скамейки</div>
             <div className='flex flex-row mb-[24px] gap-[16px]'>
                 <div className='w-3/5 h-[252px] bg-dark-blue rounded-[8px]'></div>
