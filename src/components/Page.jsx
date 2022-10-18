@@ -17,13 +17,14 @@ const Header = (props) => {
                 <span className='text-white font-medium text-[14px]'>Профиль</span>
                 <img className='w-[7px] h-[4px]' src='svg/downarrow.svg' alt=''/> 
                 <div className='flex justify-center items-center rounded-full bg-dark-blue w-[40px] h-[40px]'>
-                    {
+                    {/* {
                         auth.user === 'owner' 
                             ? <img src='images/ownerProfile.png' alt=''/>
                         : auth.user === 'stranger'
                             ? <img src='images/userProfile.png' alt=''/>
                         : <img src='images/user.png' alt='' className="h-[28px]"/>
-                    }
+                    } */}
+                    <img src='images/ownerProfile.png' alt=''/>
                 </div>
             </div>
         </header>

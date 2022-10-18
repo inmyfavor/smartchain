@@ -202,7 +202,7 @@ const Urn = (props) => {
                 </div>
                 <div className='text-[16px] font-medium text-white mb-[16px]'>Название баков</div>
                 <div className='flex flex-row gap-[30px] items-center mb-[8px]'>
-                    <div className='text-white text-[14px]'>Бак №0001</div>
+                    <div className='text-white text-[14px]'>Бак №1</div>
                     <Input
                         placeholder='Название бака' 
                         value={leftName}
@@ -213,7 +213,7 @@ const Urn = (props) => {
                     />
                 </div>
                 <div className='flex flex-row gap-[30px] items-center mb-[58px]'>
-                    <div className='text-white text-[14px]'>Бак №0002</div>
+                    <div className='text-white text-[14px]'>Бак №2</div>
                     <Input 
                         placeholder='Название бака'
                         value={rightName} 
