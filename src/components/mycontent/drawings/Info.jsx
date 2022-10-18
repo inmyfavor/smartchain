@@ -6,7 +6,7 @@ import Placement from './Placement';
 
 const Info = (props) => {
     return (
-        <div className='flex flex-col bg-dark-blue justify-left relative w-[592px] min-h-[200px] p-[32px] rounded-[16px]'>
+        <div className='flex flex-col bg-dark-blue justify-left relative min-w-[592px] min-h-[200px] p-[32px] rounded-[16px]'>
             <button onClick={props.close}
             className='absolute right-[20px] top-[20px]'>
                 <ExitIcon className='transition-all text-text-gray hover:text-white'/>

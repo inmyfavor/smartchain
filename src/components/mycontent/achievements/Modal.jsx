@@ -14,7 +14,7 @@ const tabs = {
 const Modal = (props) => {
     const [tab, setTab] = useState('saved');
     return (
-        <div className='relative flex flex-col bg-dark-blue justify-left relative w-[792px] min-h-[300px] p-[32px] rounded-[16px] z-10'>
+        <div className='relative flex flex-col bg-dark-blue justify-left relative min-w-[792px] min-h-[300px] p-[32px] rounded-[16px] z-10'>
             <button
             className='absolute right-[20px] top-[20px]'>
                 <ExitIcon onClick={props.close} className='transition-all text-text-gray hover:text-white'/>

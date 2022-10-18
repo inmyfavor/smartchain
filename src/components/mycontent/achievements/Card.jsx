@@ -31,7 +31,8 @@ const Card = (props) => {
     }[placement.split('-')[0]]), [placement]);
 
     function closeModal(event) {
-        if (event.path.indexOf(refs.reference.current) !== -1) {
+        const path = event.composedPath();
+        if (path.indexOf(refs.reference.current) !== -1) {
             return
         }
         setIsModalVisible(false);
