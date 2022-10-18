@@ -16,7 +16,7 @@ import { BlueButton } from '../Button';
 import { Status } from './Device';
 
 const Check = (props) => {
-    const [checked, setChecked] = useState(false);
+    const [checked, setChecked] = useState(props.value);
     return (
         <div className='flex flex-row items-center'>
             <div className='w-5/6 font-medium text-white text-[16px]'>{props.name}</div>
@@ -36,34 +36,39 @@ const Check = (props) => {
     );
 };
 
-const benchNames = () => {
+const benchNames = (props) => {
     const names = [
         'Дата и время', 'Температура рядом', 'Погода сейчас', 'Погода через 3 часа',
         'Погода через 6 часов', 'Погода через 9 часов', 'Реклама', 'Курс валют: USD/RUB',
         'Курс валют: EUR/RUB', 'Галерея'
     ];
+    const settings = ['dateAndTime', 'temperature', 'weatherNow', 'weather3hours', 'weather6hours',
+        'weather9hours', 'ad', 'curencyUSD', 'curencyEUR', 'gallery' ];
     let content = [];
     for(let i = 0; i < names.length; i++) {
-        content.push(<Check key={'check'+i} name={names[i]}/>)   
+        content.push(<Check key={'check'+i} name={names[i]} value={props.settings[settings[i]]}/>)   
     }
     return content;
 };
 
-const urnNames = () => {
+const urnNames = (props) => {
     const names = [
         'Дата и время', 'Температура рядом', 'Погода сейчас', 'Погода через 3 часа',
         'Погода через 6 часов', 'Погода через 9 часов', 'Реклама', 'Курс валют: USD/RUB',
-        'Курс валют: EUR/RUB', 'Отображение уровней'
+        'Курс валют: EUR/RUB', 'Заполненность урны'
     ];
+    const settings = ['dateAndTime', 'temperature', 'weatherNow', 'weather3hours', 'weather6hours',
+        'weather9hours', 'ad', 'curencyUSD', 'curencyEUR', 'levels' ];
     let content = [];
     for(let i = 0; i < names.length; i++) {
-        content.push(<Check key={'check'+i} name={names[i]}/>)   
+        content.push(<Check key={'check'+i} name={names[i]} value={props.settings[settings[i]]}/>)   
     }
     return content;
 };
 
+const colors = ['#56ccf2', '#eb5757', '#f2994a', '#27ae60', '#bb6bd9'];
+
 const colorsLine = (selected, setSelected, side) => {
-    const colors = ['#56ccf2', '#eb5757', '#f2994a', '#27ae60', '#bb6bd9'];
     const colorNames = ['Голубой', 'Красный', 'Оранжевый', 'Зелёный', 'Фиолетовый'];
     let content = [];
     for(let i = 0; i < colors.length; i++) {
@@ -76,7 +81,7 @@ const colorsLine = (selected, setSelected, side) => {
                         <div className='text-white text-[14px] font-medium'>{colorNames[i]} цвет</div>
                         {
                             i===selected 
-                                ? <div className='text-text-gray text-[13px]'>Выбран для {side} бака</div>
+                                ? <div className='text-text-gray text-[13px]'>Выбран для {side}</div>
                             : <div className='text-text-gray text-[13px]'>Нажмите, чтобы выбрать</div>
                         }
                     </div>
@@ -99,13 +104,13 @@ const colorsLine = (selected, setSelected, side) => {
     return content;
 };
 
-const Bench = () => {
+const Bench = (props) => {
       // const navigate = useNavigate();
     return (
         <div className='w-5/12'>
             <div className='flex flex-col gap-[24px] mb-[24px]'>
                 <div className='text-[18px] font-medium text-white'>Режимы</div>
-                {benchNames()}
+                {benchNames(props)}
             </div>
             <div className='flex flex-row gap-[120px] mb-[4px]'>
                 <div className='font-medium text-white text-[16px]'>Галерея:</div>
@@ -121,13 +126,18 @@ const Bench = () => {
 };
 
 const Input = (props) => {
+    const [value, setValue] = useState(props.value);
     function handleOnChange(e) {
         clearTimeout(e.target.timeout);
         props.setCheckMark('none');
+        setValue(e.target.value);
         if (e.target.value !== '') {
             e.target.timeout = setTimeout(() => {
                 props.setCheckMark('loading');
-                e.target.timeout = setTimeout(_ => props.setCheckMark('loaded'), 1000);
+                e.target.timeout = setTimeout(_ => {
+                    props.setCheckMark('loaded');
+                    props.setName(e.target.value);
+                }, 1000);
             }, 1000);
         }
     }
@@ -135,7 +145,7 @@ const Input = (props) => {
         <div className='relative w-[280px] h-[40px]'>
             <input className='w-full bg-main-blue px-[16px] py-[10px] rounded-[8px] text-white text-[14px] outline-none
                 placeholder:text-white placeholder:opacity-[0.5]' placeholder={props.placeholder}
-                onChange={handleOnChange}
+                onChange={handleOnChange} value={value}
             />
             {
                 props.checkMark === 'loading'
@@ -152,68 +162,61 @@ const Input = (props) => {
     );
 };
 
-const gradientColors = ['from-[#7093ff] to-[#5bf0ee]', 'from-[#ff7285] to-[#ff8b59]', 'from-[#ffe555] to-[#fa5ddb]',
-'from-[#3aed97] to-[#00ffe0]', 'from-[#fa5ddb] to-[#bb6bd9]'];
-
-const Urn = () => {
-    const [selectedLeft, setSelectedLeft] = useState(0);
-    const [selectedRight, setSelectedRight] = useState(2);
+const Urn = (props) => {
+    const [selectedLeft, setSelectedLeft] = useState(1);
+    const [selectedRight, setSelectedRight] = useState(0);
     const [leftCheckMark, setLeftCheckMark] = useState('none');
     const [rightCheckMark, setRightCheckMark] = useState('none');
-    const [leftName, setLeftName] = useState('');
-    const [rightName, setRightName] = useState('');
+    const [leftName, setLeftName] = useState('Пластик');
+    const [rightName, setRightName] = useState('Бумага');
     return (
         <div className='flex flex-row gap-[22px]'>
             <div className='w-5/12'>
                 <div className='flex flex-col gap-[24px] mb-[24px]'>
                     <div className='text-[18px] font-medium text-white mb-[10px]'>Режимы</div>
-                    {urnNames()}
+                    {urnNames(props)}
                 </div>
             </div>
             <div className='w-7/12'>
                 <div className='text-[18px] font-medium text-white mb-[34px]'>Параметры</div>
                 <div className='text-[16px] font-medium text-white mb-[16px]'>Заполненность урны</div>
                 <div className='flex flex-row gap-[30px] mb-[44px]'>
-                    <div className='text-white text-[14px] pt-[6px]'>Левый бак</div>
+                    <div className='text-white text-[14px] pt-[6px]'>{leftName}</div>
                     <div className='flex flex-col gap-[8px] items-center'>
                         <div className='w-[72px] h-[32px] rounded-[8px] bg-[#bbbbc2] p-[2px]'>
                             <div 
-                                style={{width: deviceInfo[1].leftWidth}}
-                                className={classNames(
-                                    'w-full h-full rounded-[7px] bg-gradient-to-br', 
-                                    gradientColors[selectedLeft]
-                                )}></div>
+                                style={{width: deviceInfo[1].leftWidth, background: colors[selectedLeft]}}
+                                className='w-full h-full rounded-[7px]'></div>
                         </div>
                         <div className='text-white text-[14px]'>{deviceInfo[1].leftWidth}</div>
                     </div>
-                    <div className='text-white text-[14px] pt-[6px]'>Правый бак</div>
+                    <div className='text-white text-[14px] pt-[6px]'>{rightName}</div>
                     <div className='flex flex-col gap-[8px] items-center'>
                         <div className='w-[72px] h-[32px] rounded-[8px] bg-[#bbbbc2] p-[2px]'>
                             <div 
-                                style={{width: deviceInfo[1].rightWidth}}
-                                className={classNames(
-                                    'w-full h-full rounded-[7px] bg-gradient-to-br', 
-                                    gradientColors[selectedRight]
-                                )}></div>
+                                style={{width: deviceInfo[1].rightWidth, background: colors[selectedRight]}}
+                                className='w-full h-full rounded-[7px]'></div>
                         </div>
                         <div className='text-white text-[14px]'>{deviceInfo[1].rightWidth}</div>
                     </div>
                 </div>
                 <div className='text-[16px] font-medium text-white mb-[16px]'>Название баков</div>
                 <div className='flex flex-row gap-[30px] items-center mb-[8px]'>
-                    <div className='text-white text-[14px]'>Левый бак</div>
-                    <Input 
-                        placeholder='Пластик' 
+                    <div className='text-white text-[14px]'>Бак №0001</div>
+                    <Input
+                        placeholder='Название бака' 
+                        value={leftName}
                         checkMark={leftCheckMark} 
                         setCheckMark={setLeftCheckMark} 
                         name={leftName} 
                         setName={setLeftName}
                     />
                 </div>
-                <div className='flex flex-row gap-[21px] items-center mb-[58px]'>
-                    <div className='text-white text-[14px]'>Правый бак</div>
+                <div className='flex flex-row gap-[30px] items-center mb-[58px]'>
+                    <div className='text-white text-[14px]'>Бак №0002</div>
                     <Input 
-                        placeholder='Бумага' 
+                        placeholder='Название бака'
+                        value={rightName} 
                         checkMark={rightCheckMark} 
                         setCheckMark={setRightCheckMark} 
                         name={rightName} 
@@ -221,18 +224,30 @@ const Urn = () => {
                     />
                 </div>
                 <div className='text-[16px] font-medium text-white mb-[18px]'>Цвета баков</div>
-                <div className='flex flex-row items-center gap-[30px] mb-[20px]'>
-                    <div className='text-[14px] text-white'>Левый бак</div>
-                    <div className='flex flex-row gap-[8px]'>
-                        {colorsLine(selectedLeft, setSelectedLeft, 'левого')}
-                    </div>
-                </div>
-                <div className='flex flex-row items-center gap-[21px]'>
-                    <div className='text-[14px] text-white'>Правый бак</div>
-                    <div className='flex flex-row gap-[8px]'>
-                        {colorsLine(selectedRight, setSelectedRight, 'правого')}
-                    </div>
-                </div>
+                <table className='mb-[20px]'>
+                    <tbody>
+                        <tr>
+                            <td className='pr-[30px]'>
+                                <div className='text-[14px] text-white'>{leftName}</div>
+                            </td>
+                            <td>
+                                <div className='flex flex-row gap-[8px]'>
+                                    {colorsLine(selectedLeft, setSelectedLeft, leftName)}
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td className='pt-[20px]'>
+                                <div className='text-[14px] text-white'>{rightName}</div>
+                            </td>
+                            <td className='pt-[20px]'>
+                                <div className='flex flex-row gap-[8px]'>
+                                    {colorsLine(selectedRight, setSelectedRight, rightName)}
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     );
@@ -241,7 +256,7 @@ const Urn = () => {
 const Settings = (props) => {
     return (
         <div className='relative w-full xl:w-3/4 min-h-[918px] flex flex-col bg-header-blue rounded-[16px] pt-[24px] pb-[92px] px-[16px] mt-[8px]'>
-            <div className='text-white text-[18px] font-medium mb-[24px]'>Настройки устройства №{props.number}</div>
+            <div className='text-white text-[18px] font-medium mb-[24px]'>Настройки {deviceInfo[props.id].secondName} №{deviceInfo[props.id].number}</div>
             <div className='flex flex-row gap-[22px] mb-[32px]'>
                 <div className='w-5/12 h-[180px] rounded-[8px] overflow-hidden'><Map markers={deviceInfo[props.id].markers}/></div>
                 <div className='w-7/12 flex flex-col'>
@@ -260,9 +275,9 @@ const Settings = (props) => {
             </div>
             { 
                 deviceInfo[props.id].name === 'Скамейка' 
-                    ? <Bench/>
+                    ? <Bench settings={deviceInfo[props.id].settings}/>
                 : deviceInfo[props.id].name === 'Урна' 
-                    ? <Urn/>
+                    ? <Urn settings={deviceInfo[props.id].settings}/>
                 : null
             }
             <BlueButton className='absolute left-[16px] bottom-[16px] w-[280px] h-[52px] text-[18px]'>

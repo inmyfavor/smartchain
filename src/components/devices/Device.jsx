@@ -27,7 +27,6 @@ const Device = (props) => {
             }
         }
     }
-    const number = (props.id.length < 4) ? '0'.repeat(4-props.id.length)+props.id : props.id
 
     const ref = useRef();
     useLayoutEffect(() => {
@@ -43,12 +42,14 @@ const Device = (props) => {
                 <div className='flex flex-col gap-[8px]'>
                     <div className='flex items-center gap-[8px] text-white text-[16px] font-medium'>
                         <Status gradient={props.filter ? 'from-[#ff7285] to-[#ff8b59]' : 'from-[#6fff2c] to-[#29eee7]'}/>
-                        {props.name} №{number}
+                        {props.name} №{props.number}
                     </div>
+                    { !props.filter &&
                     <div className='flex flex-row items-center gap-[11px]'>
                         <img src='svg/location.svg' alt=''/>
                         <span className='text-[12px] text-text-blue'>{props.address}</span>
                     </div>
+                    }
                 </div>
                 <div className='flex-1'></div>
                 <div className='flex flex-row gap-[50px] justify-center ml-[16px]'>
@@ -95,7 +96,7 @@ const Device = (props) => {
                         panel === 'about'
                             ? <AboutDevice id={props.id-1} setPanel={createSetPanel(null)}/>
                         : panel === 'settings'
-                            ? <Settings id={props.id-1} number={number} setPanel={createSetPanel(null)}/>
+                            ? <Settings id={props.id-1} setPanel={createSetPanel(null)}/>
                         : null
                     }
                 </div>

@@ -112,13 +112,40 @@ export const markers = [
 
 export const deviceInfo = [
     { id: '1', name: 'Скамейка', income: '1000', ad: 5, application: 3, markers: [ {lat: 55.751974, lon: 37.545303} ], 
-    address: 'г.Москва, Краснопресненская наб., 14', version: 2 },
+    address: 'г.Москва, Краснопресненская наб., 14', version: 2, secondName: 'скамейки', number: '0001',
+        settings: {
+            dateAndTime: true,
+            temperature: false,
+            weatherNow: true,
+            weather3hours: true,
+            weather6hours: true,
+            weather9hours: false,
+            ad: true,
+            curencyUSD: true,
+            curencyEUR: true,
+            gallery: false
+        }
+    },
     { id: '2', name: 'Урна', income: '3000', ad: 15, application: 10, markers: [ {lat: 55.751974, lon: 37.545303} ], 
-    address: 'г.Москва, Краснопресненская наб., 14', version: 2, leftWidth: '50%', rightWidth: '75%' },
-    { id: '3', name: 'Столб', income: '0', ad: 0, application: 0, markers: [ {lat: 55.751974, lon: 37.545303} ], 
-    address: 'г.Москва, Краснопресненская наб., 14', version: 2, filter: 'brightness-[.6]' },
+    address: 'г.Москва, Краснопресненская наб., 14', version: 2, leftWidth: '50%', rightWidth: '75%', secondName: 'урны',
+    number: '0001',
+        settings: {
+            dateAndTime: true,
+            temperature: true,
+            weatherNow: true,
+            weather3hours: true,
+            weather6hours: true,
+            weather9hours: false,
+            ad: false,
+            curencyUSD: true,
+            curencyEUR: true,
+            levels: true
+        }
+    },
+    { id: '3', name: 'Фонарный столб', income: '0', ad: 0, application: 0, markers: [ {lat: 55.751974, lon: 37.545303} ], 
+    address: 'г.Москва, Краснопресненская наб., 14', version: 2, filter: 'brightness-[.6]', number: '0001' },
     { id: '4', name: 'Дорожный знак', income: '0', ad: 0, application: 0, markers: [ {lat: 55.751974, lon: 37.545303} ], 
-    address: 'г.Москва, Краснопресненская наб., 14', version: 2, filter: 'brightness-[.6]' },
+    address: 'г.Москва, Краснопресненская наб., 14', version: 2, filter: 'brightness-[.6]', number: '0001' },
 ];
 
 export const show = [

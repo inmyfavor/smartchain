@@ -65,3 +65,7 @@
 }
 
 * { -webkit-tap-highlight-color: transparent; }
+
+.overflow-hidden {
+  -webkit-mask-image: -webkit-radial-gradient(white, black);
+}
