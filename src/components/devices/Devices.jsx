@@ -8,7 +8,7 @@ import { GreenButton } from '../Button';
 
 const Devices = () => {
     return (
-        <div className='flex flex-col py-[120px] px-[72px]'>
+        <div className='flex flex-col py-[50px] px-[72px]'>
             <div className='flex items-center'>
                 <div className='font-medium text-white text-[24px]'>Мои устройства</div>
                 <GreenButton className='relative py-[8px] px-[8px] ml-[24px]'>

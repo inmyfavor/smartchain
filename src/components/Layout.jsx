@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLocation, useNavigate, Outlet } from 'react-router-dom';
+import { useLocation, Link, Outlet } from 'react-router-dom';
 
 import classNames from 'classnames';
 
@@ -11,17 +11,16 @@ import { links as ownerLinks } from './owner/Data';
 
 const HeaderNav = (props) => {
     let location = useLocation();
-    let navigate = useNavigate();
     return (
         <div className='flex flex-row xl:gap-[60px] xl:ml-[71px] md:gap-[40px] md:ml-[41px]'>
             {Object.entries(props.links).map(([key, value]) =>
-                <button
-                    onClick={()=>navigate(key)}
+                <Link
+                    to={key}
                     className={classNames(
                         location.pathname === key ? 'text-white' : 'text-text-gray',
                         'transition-all hover:text-white text-[14px]'
                     )}
-                    key={'headnav:'+key}>{value}</button>
+                    key={'headnav:'+key}>{value}</Link>
             )}
         </div>
     );

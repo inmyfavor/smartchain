@@ -1,19 +1,18 @@
 import React from "react";
 
-import { useNavigate } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
-import { useAuth } from '../auth';
+// import { useAuth } from '../auth';
 
 const Header = (props) => {
-    const auth = useAuth();
-    let navigate = useNavigate();
+    // const auth = useAuth();
     return (
         <header className='flex flex-row items-center justify-between bg-header-blue h-[70px] px-[72px] py-[15px]'>
-            <div className='flex flex-row items-center gap-[16px]'>
-                <img onClick={()=>navigate('/')} className='w-[225px] h-[21px] cursor-pointer' src='svg/smartchain.svg' alt=''/>
+            <Link to="/" className='flex flex-row items-center gap-[16px]'>
+                <img className='w-[225px] h-[21px] cursor-pointer' src='svg/smartchain.svg' alt=''/>
                 { props.content }
-            </div>
-            <div onClick={()=>navigate('/profile')} className='flex flex-row items-center gap-[8px] cursor-pointer'>
+            </Link>
+            <Link to="/profile" className='flex flex-row items-center gap-[8px] cursor-pointer'>
                 <span className='text-white font-medium text-[14px]'>Профиль</span>
                 <img className='w-[7px] h-[4px]' src='svg/downarrow.svg' alt=''/> 
                 <div className='flex justify-center items-center rounded-full bg-dark-blue w-[40px] h-[40px]'>
@@ -26,18 +25,18 @@ const Header = (props) => {
                     } */}
                     <img src='images/ownerProfile.png' alt=''/>
                 </div>
-            </div>
+            </Link>
         </header>
     );
 };
 
 const Body = (props) => {
     return (
-        <div className='grow relative bg-main-blue flex flex-col overflow-y-auto'>
+        <div className='grow relative bg-[#39396e] flex flex-col overflow-y-auto'>
             <div className='grow relative'>
                 {props.children}
             </div>
-            <div className='min-h-[100px] bg-header-blue w-full'/>
+            {/* <div className='min-h-[100px] bg-header-blue w-full'/> */}
         </div>
     );
 };
