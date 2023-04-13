@@ -41,7 +41,7 @@ const Device = (props) => {
             )}>
                 <div className='flex flex-col gap-[8px]'>
                     <div className='flex items-center gap-[8px] text-white text-[16px] font-medium'>
-                        <Status gradient={props.filter ? 'from-[#ff7285] to-[#ff8b59]' : 'from-[#6fff2c] to-[#29eee7]'}/>
+                        <Status gradient={props.filter ? 'from-[#ffffff] to-[#000000]' : 'from-[#6fff2c] to-[#29eee7]'}/>
                         {props.name} №{props.number}
                     </div>
                     { !props.filter &&
