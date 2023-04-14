@@ -29,7 +29,10 @@ const Modal = () => {
             ? <UserSelect setState={setState}/>
         : state === 'congratulations'
             ? <Congratulations setState={setState}/>
-        : null
+        : null 
+            // <ReCAPTCHA
+            //         sitekey='6Lcz24UlAAAAAGWCizoCTpx03Wxus4YKawCJ7NY2'
+            //     />
     );
 };
 
