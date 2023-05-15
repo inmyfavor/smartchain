@@ -18,21 +18,19 @@ const HeaderDescr = () => {
 };
 
 const Modal = () => {
-    const [state, setState] = useState('login');
+    const [state, setState] = useState('userSelect');
+    const [selectedUser, setSelectedUser] = useState(null);
 
     return (
         state==='login' 
             ? <Login setState={setState}/> 
         : state === 'register' 
-            ? <Register setState={setState}/>
+            ? <Register setState={setState} selectedUser={selectedUser}/>
         : state === 'userSelect'
-            ? <UserSelect setState={setState}/>
+            ? <UserSelect setState={setState} selectedUser={selectedUser} setSelectedUser={setSelectedUser}/>
         : state === 'congratulations'
             ? <Congratulations setState={setState}/>
         : null 
-            // <ReCAPTCHA
-            //         sitekey='6Lcz24UlAAAAAGWCizoCTpx03Wxus4YKawCJ7NY2'
-            //     />
     );
 };
 

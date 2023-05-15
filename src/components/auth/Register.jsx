@@ -1,11 +1,13 @@
 import React from 'react';
 
 import Input from '../Input';
-import {PinkButton} from '../Button';
+import { PinkButton } from '../Button';
 import Modal from './Modal';
 import ReCAPTCHA from 'react-google-recaptcha';
+import { handleSubmit } from './handleSubmit.jsx'
 
 const Register = (props) => {
+
     return (
         <Modal>
             <div className='flex flex-row justify-between items-center'>
@@ -17,11 +19,24 @@ const Register = (props) => {
             <form onSubmit={() => props.setState('congratulations')}>
                 <div className='mb-[24px]'></div>
                 <div className='flex flex-col gap-[16px]'>
-                    <Input placeholder='ФИО'/>
+                    <Input type='email' placeholder='Логин'/>
+                    <Input type='password' placeholder='Пароль'/>
+                    <Input placeholder='Имя'/>
+                    { 
+                        props.selectedUser == 'Владелец' &&
+                            <>
+                            <Input placeholder='Фамилия'/>
+                            <Input placeholder='Компания'/> 
+                            </> 
+                    }
                     <Input type='phone' placeholder='Номер телефона'/>
-                    <Input type='email' placeholder='Почта'/>
                 </div>
-                <PinkButton type='submit' className='w-full p-[13px] mt-[24px] text-[18px]'>Зарегистрироваться</PinkButton>
+                <PinkButton 
+                    type='submit' 
+                    className='w-full p-[13px] mt-[24px] text-[18px]'
+                    onClick={handleSubmit}>
+                        Зарегистрироваться
+                    </PinkButton>
             </form>
             <div className='mb-[24px]'></div>
             <div className='flex flex-row items-center gap-[16px]'>
