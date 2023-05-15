@@ -5,11 +5,13 @@
 // const navigate = useNavigate();
 // const auth = useAuth();
 
-// export function handleSubmit(event) {
+// function handleSubmit(event) {
 //     event.preventDefault();
 
-//     const user = selectedUser === 'Прохожий' ? 'stranger' : 'owner'
+//     const user = props.selectedUser === 'Прохожий' ? 'stranger' : 'owner'
 //     auth.signin(user);
-//     const to = selectedUser === 'Прохожий' ? '/' : '/devices';
+//     const to = props.selectedUser === 'Прохожий' ? '/' : '/devices';
 //     navigate(to, { replace: true });
 // }
+
+// export default handleSubmit;

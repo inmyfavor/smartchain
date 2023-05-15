@@ -23,13 +23,13 @@ const Modal = () => {
 
     return (
         state==='login' 
-            ? <Login setState={setState}/> 
+            ? <Login setState={setState} selectedUser={selectedUser}/> 
         : state === 'register' 
             ? <Register setState={setState} selectedUser={selectedUser}/>
         : state === 'userSelect'
             ? <UserSelect setState={setState} selectedUser={selectedUser} setSelectedUser={setSelectedUser}/>
-        : state === 'congratulations'
-            ? <Congratulations setState={setState}/>
+        // : state === 'congratulations'
+        //     ? <Congratulations setState={setState}/>
         : null 
     );
 };

@@ -4,10 +4,23 @@ import Input from '../Input';
 import { PinkButton } from '../Button';
 import Modal from './Modal';
 import ReCAPTCHA from 'react-google-recaptcha';
-import { handleSubmit } from './handleSubmit.jsx'
+// import { handleSubmit } from './handleSubmit.jsx'
+
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../auth';
 
 const Register = (props) => {
+    const navigate = useNavigate();
+    const auth = useAuth();
 
+    function handleSubmit(event) {
+        event.preventDefault();
+    
+        const user = props.selectedUser === 'Прохожий' ? 'stranger' : 'owner'
+        auth.signin(user);
+        const to = props.selectedUser === 'Прохожий' ? '/' : '/devices';
+        navigate(to, { replace: true });
+    }
     return (
         <Modal>
             <div className='flex flex-row justify-between items-center'>
@@ -16,14 +29,14 @@ const Register = (props) => {
                     onClick={()=>props.setState('login')}
                     className='text-white text-[14px] opacity-[0.5] transition-all hover:opacity-[1]'>Войти в аккаунт</button>
             </div>
-            <form onSubmit={() => props.setState('congratulations')}>
+            <form>
                 <div className='mb-[24px]'></div>
                 <div className='flex flex-col gap-[16px]'>
                     <Input type='email' placeholder='Логин'/>
                     <Input type='password' placeholder='Пароль'/>
                     <Input placeholder='Имя'/>
                     { 
-                        props.selectedUser == 'Владелец' &&
+                        props.selectedUser === 'Владелец' &&
                             <>
                             <Input placeholder='Фамилия'/>
                             <Input placeholder='Компания'/> 
@@ -34,7 +47,8 @@ const Register = (props) => {
                 <PinkButton 
                     type='submit' 
                     className='w-full p-[13px] mt-[24px] text-[18px]'
-                    onClick={handleSubmit}>
+                    onClick={handleSubmit}
+                    >
                         Зарегистрироваться
                     </PinkButton>
             </form>

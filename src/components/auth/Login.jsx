@@ -1,11 +1,27 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
 
 import Input from '../Input';
 import {PinkButton} from '../Button';
 import Modal from './Modal';
+// import handleSubmit from './handleSubmit';
+
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../auth';
 
 const Login = (props) => {
+    const navigate = useNavigate();
+    const auth = useAuth();
+
+    function handleSubmit(event) {
+        event.preventDefault();
+    
+        const user = props.selectedUser === 'Прохожий' ? 'stranger' : 'owner'
+        auth.signin(user);
+        const to = props.selectedUser === 'Прохожий' ? '/' : '/devices';
+        navigate(to, { replace: true });
+    }
+
     return (
         <Modal>
             <div className='flex flex-row justify-between items-center'>
@@ -20,7 +36,13 @@ const Login = (props) => {
                     <Input placeholder='Логин'/>
                     <Input type='phone' placeholder='Пароль'/>
                 </div>
-                <PinkButton type='submit' className='w-full p-[13px] mt-[24px] text-[18px]'>Войти</PinkButton>
+                <PinkButton 
+                    type='submit' 
+                    className='w-full p-[13px] mt-[24px] text-[18px]'
+                    onClick={handleSubmit}
+                    >
+                        Войти
+                    </PinkButton>
             </form>
             <div className='mb-[16px]'></div>
             <button className='text-white text-[14px] opacity-[0.5] transition-all hover:opacity-[1]'>Забыли пароль?</button>

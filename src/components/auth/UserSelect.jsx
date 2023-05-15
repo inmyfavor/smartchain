@@ -24,22 +24,6 @@ const User = (props) => {
 };
 
 const UserSelect = (props) => {
-    // const navigate = useNavigate();
-    // чтобы сохранить страницу с которой пришел
-    // const location = useLocation();
-    // let from = location.state?.from?.pathname || "/";
-    // const auth = useAuth();
-
-    // function handleSubmit(event) {
-    //     event.preventDefault();
-
-    //     const user = selectedUser === 'Прохожий' ? 'stranger' : 'owner'
-    //     auth.signin(user);
-    //     const to = selectedUser === 'Прохожий' ? '/' : '/devices';
-    //     navigate(to, { replace: true });
-    // }
-
-    // const [selectedUser, setSelectedUser] = useState(null);
     return (
         <Modal>
             <div className='text-white text-[18px] font-medium text-center'>Выбор пользователя</div>
