@@ -10,6 +10,15 @@ import { useAuth } from '../../auth';
 
 import * as api from '../../api';
 
+function isEmpty(obj) {
+    for (let key in obj) {
+        if (obj[key] === '') {
+            return false;
+        }
+    }
+    return true;
+}
+
 const Register = (props) => {
     const navigate = useNavigate();
     const auth = useAuth();
@@ -18,19 +27,21 @@ const Register = (props) => {
 
     async function handleSubmit(event) {
         event.preventDefault();
-        const data = new FormData(event.target);
-        let userData;
-        try {
-            userData = await api.register(Object.fromEntries(data.entries()));
-            console.log(userData);
-        } catch(e) {
-            setError(''+e);
-            return
+        const data = Object.fromEntries(new FormData(event.target).entries());
+        if (isEmpty(data)) {
+            let userData;
+            try {
+                userData = await api.register(data);
+                console.log(userData);
+            } catch(e) {
+                setError(''+e);
+                return
+            }
+            const userType = props.selectedUser === 'Прохожий' ? 'stranger' : 'owner'
+            auth.signin({...userData, type: userType});
+            const to = props.selectedUser === 'Прохожий' ? '/' : '/devices';
+            navigate(to, { replace: true });
         }
-        const userType = props.selectedUser === 'Прохожий' ? 'stranger' : 'owner'
-        auth.signin({...userData, type: userType});
-        const to = props.selectedUser === 'Прохожий' ? '/' : '/devices';
-        navigate(to, { replace: true });
     }
 
     return (
