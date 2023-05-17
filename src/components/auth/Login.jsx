@@ -1,23 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
 
 import Input from '../Input';
 import {PinkButton} from '../Button';
 import Modal from './Modal';
-// import handleSubmit from './handleSubmit';
 
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../auth';
+
+import * as api from '../../api';
 
 const Login = (props) => {
     const navigate = useNavigate();
     const auth = useAuth();
 
-    function handleSubmit(event) {
+    const [error, setError] = useState(null)
+
+    async function handleSubmit(event) {
         event.preventDefault();
-    
-        const user = props.selectedUser === 'Прохожий' ? 'stranger' : 'owner'
-        auth.signin(user);
+        const data = new FormData(event.target);
+        let userData;
+        try {
+            userData = await api.login(data.get('username'), data.get('password'));
+        } catch(e) {
+            setError(''+e);
+            return
+        }
+        const userType = props.selectedUser === 'Прохожий' ? 'stranger' : 'owner'
+        auth.signin({...userData, type: userType});
         const to = props.selectedUser === 'Прохожий' ? '/' : '/devices';
         navigate(to, { replace: true });
     }
@@ -30,21 +40,21 @@ const Login = (props) => {
                     onClick={()=>props.setState('register')}
                     className='text-white text-[14px] opacity-[0.5] transition-all hover:opacity-[1]'>Зарегистрироваться</button>
             </div>
-            <form onSubmit={() => props.setState('userSelect')}>
+            <form onSubmit={handleSubmit} onChange={() => setError(null)}>
                 <div className='mb-[24px]'></div>
                 <div className='flex flex-col gap-[16px]'>
-                    <Input placeholder='Логин'/>
-                    <Input type='phone' placeholder='Пароль'/>
+                    <Input name="username" type="email" placeholder='Логин'/>
+                    <Input name="password" type='password' placeholder='Пароль'/>
                 </div>
                 <PinkButton 
                     type='submit' 
                     className='w-full p-[13px] mt-[24px] text-[18px]'
-                    onClick={handleSubmit}
                     >
                         Войти
                     </PinkButton>
             </form>
             <div className='mb-[16px]'></div>
+            { error && <div className='text-[red] text-center mb-[5px]'>{error}</div> }
             <button className='text-white text-[14px] opacity-[0.5] transition-all hover:opacity-[1]'>Забыли пароль?</button>
             <div className='mb-[24px]'></div>
             <div className='flex flex-row items-center gap-[16px]'>

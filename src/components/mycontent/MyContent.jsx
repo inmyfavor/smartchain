@@ -18,9 +18,9 @@ const tabs = {
 
 const MyContent = () => {
     const auth = useAuth();
-    const initialCards = auth.user === 'owner' ? initialCardsOwn : initialCardsStr;
-    const achievements = auth.user === 'owner' ? achievementsOwn : achievementsStr;
-    const saved = auth.user === 'owner' ? savedOwn : savedStr;
+    const initialCards = auth.user?.type === 'owner' ? initialCardsOwn : initialCardsStr;
+    const achievements = auth.user?.type === 'owner' ? achievementsOwn : achievementsStr;
+    const saved = auth.user?.type === 'owner' ? savedOwn : savedStr;
     const [tab, setTab] = useState('drawings');
     return (
         <div className='mx-[72px] my-[50px]'>

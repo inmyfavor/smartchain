@@ -4,22 +4,12 @@ import Input from '../Input';
 import { PinkButton } from '../Button';
 import Modal from './Modal';
 import ReCAPTCHA from 'react-google-recaptcha';
-// import { handleSubmit } from './handleSubmit.jsx'
 
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../auth';
 
 const Register = (props) => {
-    const navigate = useNavigate();
-    const auth = useAuth();
-
+    // const handleSubmit = useSubmit(props.selectedUser);
     function handleSubmit(event) {
-        event.preventDefault();
-    
-        const user = props.selectedUser === 'Прохожий' ? 'stranger' : 'owner'
-        auth.signin(user);
-        const to = props.selectedUser === 'Прохожий' ? '/' : '/devices';
-        navigate(to, { replace: true });
+
     }
     return (
         <Modal>

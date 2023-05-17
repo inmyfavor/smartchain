@@ -4,11 +4,14 @@ import { useLocation, Navigate } from 'react-router-dom';
 
 const AuthContext = React.createContext(null);
 
-export function AuthProvider({ children }) {
-  const [user, setUser] = React.useState(null);
+const prevUser = JSON.parse(window.localStorage.user || 'null');
 
-  const signin = (newUser) => {
-    setUser(newUser);
+export function AuthProvider({ children }) {
+  const [user, setUser] = React.useState(prevUser);
+
+  const signin = (user) => {
+    setUser(user);
+    window.localStorage.user = JSON.stringify(user);
   };
 
   const value = { user, signin };

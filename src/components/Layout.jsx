@@ -28,7 +28,7 @@ const HeaderNav = (props) => {
 
 const Layout = () => {
     const { user } = useAuth();
-    const links = user === 'owner' ? ownerLinks : strangerLinks;
+    const links = user?.type === 'owner' ? ownerLinks : strangerLinks;
     return (
         <Page header={<HeaderNav links={links}/>}>
             <Outlet/>
