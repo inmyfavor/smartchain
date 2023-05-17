@@ -14,7 +14,7 @@ const Login = (props) => {
     const navigate = useNavigate();
     const auth = useAuth();
 
-    const [error, setError] = useState(null)
+    const [error, setError] = useState(null);
 
     async function handleSubmit(event) {
         event.preventDefault();

@@ -1,16 +1,38 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import Input from '../Input';
 import { PinkButton } from '../Button';
 import Modal from './Modal';
 import ReCAPTCHA from 'react-google-recaptcha';
 
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../auth';
+
+import * as api from '../../api';
 
 const Register = (props) => {
-    // const handleSubmit = useSubmit(props.selectedUser);
-    function handleSubmit(event) {
+    const navigate = useNavigate();
+    const auth = useAuth();
 
+    const [error, setError] = useState(null);
+
+    async function handleSubmit(event) {
+        event.preventDefault();
+        const data = new FormData(event.target);
+        let userData;
+        try {
+            userData = await api.register(Object.fromEntries(data.entries()));
+            console.log(userData);
+        } catch(e) {
+            setError(''+e);
+            return
+        }
+        const userType = props.selectedUser === 'Прохожий' ? 'stranger' : 'owner'
+        auth.signin({...userData, type: userType});
+        const to = props.selectedUser === 'Прохожий' ? '/' : '/devices';
+        navigate(to, { replace: true });
     }
+
     return (
         <Modal>
             <div className='flex flex-row justify-between items-center'>
@@ -19,30 +41,31 @@ const Register = (props) => {
                     onClick={()=>props.setState('login')}
                     className='text-white text-[14px] opacity-[0.5] transition-all hover:opacity-[1]'>Войти в аккаунт</button>
             </div>
-            <form>
+            <form onSubmit={handleSubmit} onChange={() => setError(null)}>
                 <div className='mb-[24px]'></div>
                 <div className='flex flex-col gap-[16px]'>
-                    <Input type='email' placeholder='Логин'/>
-                    <Input type='password' placeholder='Пароль'/>
-                    <Input placeholder='Имя'/>
+                    <Input name='email' type='email' placeholder='Логин'/>
+                    <Input name='password' type='password' placeholder='Пароль'/>
+                    <Input name='firstname' placeholder='Имя'/>
                     { 
                         props.selectedUser === 'Владелец' &&
                             <>
-                            <Input placeholder='Фамилия'/>
-                            <Input placeholder='Компания'/> 
+                            <Input name='lastname' placeholder='Фамилия'/>
+                            <Input name='company' placeholder='Компания'/> 
+                            <Input name='tech_phone' type='phone' placeholder='Технический телефон'/>
                             </> 
                     }
-                    <Input type='phone' placeholder='Номер телефона'/>
+                    <Input name='phone' type='phone' placeholder='Номер телефона'/>
                 </div>
                 <PinkButton 
                     type='submit' 
                     className='w-full p-[13px] mt-[24px] text-[18px]'
-                    onClick={handleSubmit}
                     >
                         Зарегистрироваться
                     </PinkButton>
             </form>
             <div className='mb-[24px]'></div>
+            { error && <div className='text-[red] text-center mb-[5px]'>{error}</div> }
             <div className='flex flex-row items-center gap-[16px]'>
                 <span className='text-[14px] text-white opacity-[0.5]'>Зарегистрировать через</span>
                 <img className='w-[32px] h-[32px]' src='svg/google.svg' alt=''/> 
