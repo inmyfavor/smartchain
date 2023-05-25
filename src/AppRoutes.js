@@ -4,10 +4,10 @@ import { AuthProvider, RequireAuth } from './auth';
 
 import Advertisement from './components/advertisement/Advertisement.jsx';
 import MyContent from './components/mycontent/MyContent.jsx';
-import Profile from './components/Profile.jsx';
 import Devices from './components/devices/Devices.jsx';
 import Layout from './components/Layout';
 import Auth from './components/auth/Auth';
+import Profile from './components/Profile';
 
 const AppRoutes = () => {
     return (

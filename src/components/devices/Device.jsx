@@ -4,11 +4,28 @@ import classNames from 'classnames';
 
 import AboutDevice from './AboutDevice';
 import Settings from './Settings';
+import BenchIcon from '../devicesIcons/BenchIcon';
+import BanketIcon from '../devicesIcons/BanketIcon';
+import BinIcon from '../devicesIcons/BinIcon';
+import BookIcon from '../devicesIcons/BookIcon';
+import EcoIcon from '../devicesIcons/EcoIcon';
+import ScreenIcon from '../devicesIcons/ScreenIcon';
+import SignIcon from '../devicesIcons/SignIcon';
+import WifiIcon from '../devicesIcons/WifiIcon';
+import PostIcon from '../devicesIcons/PostIcon';
 
 export const Status = (props) => {
     return (
         <div className='flex justify-center items-center bg-main-blue h-[16px] w-[16px] rounded-[16px]'>
             <div className={classNames('w-[8px] h-[8px] rounded-[8px] bg-gradient-to-br', props.gradient)}></div>
+        </div>
+    );
+};
+
+const IconStatus = (props) => {
+    return (
+        <div className='flex justify-center items-center bg-main-blue h-[24px] w-[24px] rounded-[24px]'>
+            <div>{props.icon}</div>
         </div>
     );
 };
@@ -39,9 +56,35 @@ const Device = (props) => {
                 'transition-all flex flex-row h-[78px] rounded-[16px] py-[12px] px-[16px] w-full xl:w-3/4',
                 (panel != null) ? 'bg-dark-blue' : 'bg-header-blue'
             )}>
+                
                 <div className='flex flex-col gap-[8px]'>
+                    <svg aria-hidden="true" focusable="false" className="w-0 h-0 absolute">
+                        <linearGradient id="paint0_linear_2594_5357" x1="3.25006" y1="19.2961" x2="23.111" y2="8.76396" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#3AED97"/>
+                            <stop offset="1" stop-color="#00FFE0"/>
+                        </linearGradient>
+                    </svg>
                     <div className='flex items-center gap-[8px] text-white text-[16px] font-medium'>
-                        <Status gradient={props.filter ? 'from-[#ffffff] to-[#000000]' : 'from-[#6fff2c] to-[#29eee7]'}/>
+                        { props.name === 'Скамейка'
+                            ? <IconStatus icon={ <BenchIcon fill='url(#paint0_linear_2594_5357)'/> } />
+                        : props.name === 'Банкетка'
+                            ? <IconStatus icon={ <BanketIcon/> } />
+                        : props.name === 'Урна'
+                            ? <IconStatus icon={ <BinIcon fill='url(#paint0_linear_2594_5357)'/> } />
+                        : props.name === 'Буккроссинг'
+                            ? <IconStatus icon={ <BookIcon/> } />
+                        : props.name === 'Эко портал'
+                            ? <IconStatus icon={ <EcoIcon/> } />
+                        : props.name === 'Экран'
+                            ? <IconStatus icon={ <ScreenIcon/> } />
+                        : props.name === 'Дорожный знак'
+                            ? <IconStatus icon={ <SignIcon/> } />
+                        : props.name === 'Станция + Wi-Fi'
+                            ? <IconStatus icon={ <WifiIcon/> } />
+                        : props.name === 'Фонарный столб'
+                            ? <IconStatus icon={ <PostIcon/> } />
+                        : null
+                        }
                         {props.name} №{props.number}
                     </div>
                     { !props.filter &&
