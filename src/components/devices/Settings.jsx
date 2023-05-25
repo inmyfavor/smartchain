@@ -18,7 +18,7 @@ import { Status } from './Device';
 const Check = (props) => {
     const [checked, setChecked] = useState(props.value);
     return (
-        <div className='flex flex-row items-center'>
+        <div className='flex flex-row items-center cursor-pointer'>
             <div className='w-5/6 font-medium text-white text-[16px]'>{props.name}</div>
             <div className='w-1/6'>
                 <div
