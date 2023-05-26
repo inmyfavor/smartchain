@@ -75,7 +75,10 @@ const AboutDevice = (props) => {
             <div className='flex flex-row mb-[24px] gap-[16px]'>
                 <div className='w-3/5 h-[252px] bg-dark-blue rounded-[8px]'></div>
                 <div className='w-2/5 h-[252px] rounded-[8px] overflow-hidden'>
-                    <Map markers={deviceInfo[props.id].markers}/>
+                    <Map 
+                        markers={deviceInfo[props.id].markers}
+                        name={props.name}
+                        status={props.status}/>
                 </div>
             </div>
             <div className='text-white text-[18px] font-medium mb-[16px]'>Сейчас показывает</div>

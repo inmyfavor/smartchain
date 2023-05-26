@@ -113,6 +113,7 @@ export const markers = [
 export const deviceInfo = [
     { id: '1', name: 'Скамейка', income: '1000', ad: 5, application: 3, markers: [ {lat: 55.755687, lon: 37.829557} ], 
     address: 'г.Москва, ул. Молостовых, 14А', version: 2, secondName: 'скамейки', number: '0001',
+    status: 'ok',
         settings: {
             dateAndTime: true,
             temperature: false,
@@ -128,6 +129,7 @@ export const deviceInfo = [
     },
     { id: '2', name: 'Урна', income: '3000', ad: 15, application: 10, markers: [ {lat: 55.755687, lon: 37.829557} ], 
     address: 'г.Москва, ул. Молостовых, 14А', version: 2, leftWidth: '50%', rightWidth: '75%', secondName: 'урны',
+    status: 'ok',
     number: '0001',
         settings: {
             dateAndTime: true,
@@ -143,9 +145,11 @@ export const deviceInfo = [
         }
     },
     { id: '3', name: 'Фонарный столб', income: '0', ad: 0, application: 0, markers: [ {lat: 55.755687, lon: 37.829557} ], 
-    address: 'г.Москва, ул. Молостовых, 14А', version: 2, filter: 'brightness-[.6]', number: '0001' },
+    address: 'г.Москва, ул. Молостовых, 14А', version: 2, filter: 'brightness-[.6]', number: '0001',
+    status: 'disabled' },
     { id: '4', name: 'Дорожный знак', income: '0', ad: 0, application: 0, markers: [ {lat: 55.755687, lon: 37.829557} ], 
-    address: 'г.Москва, ул. Молостовых, 14А', version: 2, filter: 'brightness-[.6]', number: '0001' },
+    address: 'г.Москва, ул. Молостовых, 14А', version: 2, filter: 'brightness-[.6]', number: '0001',
+    status: 'disabled' },
 ];
 
 export const show = [

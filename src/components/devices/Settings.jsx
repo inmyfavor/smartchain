@@ -258,7 +258,9 @@ const Settings = (props) => {
         <div className='relative w-full xl:w-3/4 min-h-[918px] flex flex-col bg-header-blue rounded-[16px] pt-[24px] pb-[92px] px-[16px] mt-[8px]'>
             <div className='text-white text-[18px] font-medium mb-[24px]'>Настройки {deviceInfo[props.id].secondName} №{deviceInfo[props.id].number}</div>
             <div className='flex flex-row gap-[22px] mb-[32px]'>
-                <div className='w-5/12 h-[180px] rounded-[8px] overflow-hidden'><Map markers={deviceInfo[props.id].markers}/></div>
+                <div className='w-5/12 h-[180px] rounded-[8px] overflow-hidden'>
+                    <Map markers={deviceInfo[props.id].markers} name={props.name} status={props.status}/>
+                </div>
                 <div className='w-7/12 flex flex-col'>
                     <div className='font-medium text-white text-[16px] mb-[8px]'>Адрес установки:</div>
                     <div className='text-[14px] text-text-gray mb-[24px]'>{deviceInfo[props.id].address}</div>

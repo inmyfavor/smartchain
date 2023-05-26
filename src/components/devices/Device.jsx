@@ -4,15 +4,7 @@ import classNames from 'classnames';
 
 import AboutDevice from './AboutDevice';
 import Settings from './Settings';
-import BenchIcon from '../devicesIcons/BenchIcon';
-import BanketIcon from '../devicesIcons/BanketIcon';
-import BinIcon from '../devicesIcons/BinIcon';
-import BookIcon from '../devicesIcons/BookIcon';
-import EcoIcon from '../devicesIcons/EcoIcon';
-import ScreenIcon from '../devicesIcons/ScreenIcon';
-import SignIcon from '../devicesIcons/SignIcon';
-import WifiIcon from '../devicesIcons/WifiIcon';
-import PostIcon from '../devicesIcons/PostIcon';
+import DeviceType from '../DeviceType';
 
 export const Status = (props) => {
     return (
@@ -58,33 +50,8 @@ const Device = (props) => {
             )}>
                 
                 <div className='flex flex-col gap-[8px]'>
-                    <svg aria-hidden="true" focusable="false" className="w-0 h-0 absolute">
-                        <linearGradient id="paint0_linear_2594_5357" x1="3.25006" y1="19.2961" x2="23.111" y2="8.76396" gradientUnits="userSpaceOnUse">
-                            <stop stop-color="#3AED97"/>
-                            <stop offset="1" stop-color="#00FFE0"/>
-                        </linearGradient>
-                    </svg>
                     <div className='flex items-center gap-[8px] text-white text-[16px] font-medium'>
-                        { props.name === 'Скамейка'
-                            ? <IconStatus icon={ <BenchIcon fill='url(#paint0_linear_2594_5357)'/> } />
-                        : props.name === 'Банкетка'
-                            ? <IconStatus icon={ <BanketIcon/> } />
-                        : props.name === 'Урна'
-                            ? <IconStatus icon={ <BinIcon fill='url(#paint0_linear_2594_5357)'/> } />
-                        : props.name === 'Буккроссинг'
-                            ? <IconStatus icon={ <BookIcon/> } />
-                        : props.name === 'Эко портал'
-                            ? <IconStatus icon={ <EcoIcon/> } />
-                        : props.name === 'Экран'
-                            ? <IconStatus icon={ <ScreenIcon/> } />
-                        : props.name === 'Дорожный знак'
-                            ? <IconStatus icon={ <SignIcon/> } />
-                        : props.name === 'Станция + Wi-Fi'
-                            ? <IconStatus icon={ <WifiIcon/> } />
-                        : props.name === 'Фонарный столб'
-                            ? <IconStatus icon={ <PostIcon/> } />
-                        : null
-                        }
+                        <IconStatus icon={ <DeviceType name={props.name} status={props.status}/> } />
                         {props.name} №{props.number}
                     </div>
                     { !props.filter &&
@@ -112,7 +79,7 @@ const Device = (props) => {
                 <div className='flex-1'></div>
                 <div className='flex flex-row gap-[8px] justify-end'>
                     <button
-                        disabled={props.filter}
+                        disabled={props.status === 'disabled'}
                         onClick={createSetPanel('about')}
                         className={classNames(
                             'flex items-center justify-center w-[24px] h-[24px] rounded-[24px] shrink-0',
@@ -122,7 +89,7 @@ const Device = (props) => {
                         <img src='svg/money.svg' alt=''/>
                     </button>
                     <button
-                        disabled={props.filter}
+                        disabled={props.status === 'disabled'}
                         onClick={createSetPanel('settings')}
                         className={classNames(
                             'flex items-center justify-center w-[24px] h-[24px] rounded-[24px] shrink-0',
@@ -137,9 +104,17 @@ const Device = (props) => {
                 <div>
                     {
                         panel === 'about'
-                            ? <AboutDevice id={props.id-1} setPanel={createSetPanel(null)}/>
+                            ? <AboutDevice 
+                                id={props.id-1} 
+                                setPanel={createSetPanel(null)}
+                                name={props.name}
+                                status={props.status}/>
                         : panel === 'settings'
-                            ? <Settings id={props.id-1} setPanel={createSetPanel(null)}/>
+                            ? <Settings 
+                                id={props.id-1} 
+                                setPanel={createSetPanel(null)} 
+                                name={props.name}
+                                status={props.status}/>
                         : null
                     }
                 </div>
