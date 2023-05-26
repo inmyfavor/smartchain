@@ -31,6 +31,7 @@ const Register = (props) => {
         if (isEmpty(data)) {
             let userData;
             try {
+                data.owner = props.selectedUser !== 'Прохожий';
                 userData = await api.register(data);
                 console.log(userData);
             } catch(e) {
@@ -63,7 +64,7 @@ const Register = (props) => {
                             <>
                             <Input name='lastname' placeholder='Фамилия'/>
                             <Input name='company' placeholder='Компания'/> 
-                            <Input name='tech_phone' type='phone' placeholder='Технический телефон'/>
+                            <Input name='tech_tel' type='phone' placeholder='Технический телефон'/>
                             </> 
                     }
                     <Input name='phone' type='phone' placeholder='Номер телефона'/>

@@ -1,73 +1,78 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { PinkButton } from '../components/Button.jsx';
 import Input from '../components/Input.jsx';
 import PageNav from '../components/PageNav.jsx';
 
 import { useAuth } from '../auth';
+import { getRegisterInfo } from '../api.js';
 
-const tabsOwner = {
-    'profileOwner': 'Профиль',
-    'contentOwner': 'Контент'
-};
-
-const tabsStranger = {
-    'profileStranger': 'Профиль',
-    'contentStranger': 'Контент'
+const tabs = {
+    'profile': 'Профиль',
+    'content': 'Контент'
 };
 
 const Line = (props) => {
     return (
         <div className='flex justify-between items-center'>
             <div className='w-1/2 text-[18px] text-white'>{props.title}</div>
-            <Input style={{width: '50%'}}/>
+            <Input 
+                style={{width: '50%'}} 
+                value={props.value}
+                onChange={e => props.setValue(e.target.value)} />
         </div>
     );
 };
 
-const Modal = (props) => {
+const ModalProfile = (props) => {
+
+    const [data, setData] = useState({})
+    useEffect(() => {
+       (async () => {
+            const info = await getRegisterInfo();
+            setData(info);
+       })()
+    }, []);
+
+    function dispatch(field) {
+        return (value) => {
+            const newData = Object.assign({}, data);
+            let obj = newData;
+            let path = field.split('.');
+            path.forEach((f, i) => {
+                if (i === path.length-1) {
+                    obj[f] = value;
+                } else {
+                    obj = obj[f];
+                }
+            });
+            setData(newData);
+        }
+    }
+
     return (
         <div className='flex flex-col justify-end w-full min-h-[320px] bg-header-blue rounded-[16px] p-[16px]'>
-            {props.children}
+            <div className='flex flex-col gap-[8px] mb-[24px]'>
+                <Line title='Логин' value={data.email} setValue={dispatch('email')}/>
+                <Line title='Пароль' value={data.password} setValue={dispatch('password')}/>
+                <Line title='Имя' value={data.firstname} setValue={dispatch('firstname')}/>
+                { props.userType === 'owner' &&
+                    <>
+                        <Line title='Фамилия' value={data.lastname} setValue={dispatch('lastname')}/>
+                        <Line title='Компания' value={data.company?.name} setValue={dispatch('company.name')}/>
+                        <Line title='Технический телефон' value={data.tech_tel} setValue={dispatch('tech_tel')}/>
+                    </>
+                }
+                <Line title='Номер телефона' value={data.phone} setValue={dispatch('phone')}/>
+            </div>
+            <PinkButton className='w-1/4 h-[40px]'>Сохранить</PinkButton>
         </div>
-    );
-};
-
-const ProfileOwner = () => {
-    return (
-        <Modal>
-            <div className='flex flex-col gap-[8px] mb-[24px]'>
-                <Line title='Логин'/>
-                <Line title='Пароль'/>
-                <Line title='Имя'/>
-                <Line title='Фамилия'/>
-                <Line title='Компания'/>
-                <Line title='Технический телефон'/>
-                <Line title='Номер телефона'/>
-            </div>
-            <PinkButton className='w-1/4 h-[40px]'>Сохранить</PinkButton>
-        </Modal>
-    );
-};
-
-const ProfileStranger = () => {
-    return (
-        <Modal>
-            <div className='flex flex-col gap-[8px] mb-[24px]'>
-                <Line title='Логин'/>
-                <Line title='Пароль'/>
-                <Line title='Имя'/>
-                <Line title='Номер телефона'/>
-            </div>
-            <PinkButton className='w-1/4 h-[40px]'>Сохранить</PinkButton>
-        </Modal>
     );
 };
 
 const Profile = () => {
     const auth = useAuth();
-    const prof = auth.user?.type === 'owner' ? 'profileOwner' : 'profileStranger'
-    const [tab, setTab] = useState(prof);
+    const [tab, setTab] = useState('profile');
     return (
         <div className='mx-[72px] my-[50px]'>
             <div className='flex flex-col'>
@@ -76,19 +81,15 @@ const Profile = () => {
                         <PageNav 
                             tab={tab} 
                             setTab={setTab} 
-                            tabs={ auth.user?.type === 'owner' ? tabsOwner : tabsStranger } 
+                            tabs={tabs} 
                             gap='16px' 
                             text='20px' 
                             flex='column'/>
                         {
-                            tab === 'profileOwner'
-                                ? <ProfileOwner />
-                            : tab === 'contentOwner'
-                                ? <Modal />
-                            : tab === 'profileStranger'
-                                ? <ProfileStranger />
-                            : tab === 'contentStranger'
-                                ? <Modal />
+                            tab === 'profile'
+                                ? <ModalProfile userType={auth.user?.type}/>
+                            : tab === 'content'
+                                ? <></>
                             : null
                         }
                     </div>

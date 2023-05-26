@@ -1,3 +1,5 @@
+import { getUser } from "./auth";
+
 async function post(url, data) {
     const response = await fetch(url, {
         method: 'POST',
@@ -21,8 +23,10 @@ async function get(url) {
             'Content-Type': 'application/json'
         }
     });
-    return await response.json();
-    
+    const { error, result } = await response.json();
+    if (error)
+        throw new Error(error);
+    return result;
 }
 
 export async function login(email, password) {
@@ -57,5 +61,14 @@ export async function getBenchData() {
  
 export async function getGalleryImagesList() {
     return await get('/api/user_benches?api_token=3vI0En7EYsnY78q9Qt0oQVgKJZun4RbB')
+}
+
+export async function getRegisterInfo() {
+    const user = getUser()
+    return await get(`/api/user?api_token=${user.api_token}`)
+}
+
+export async function changeProfileInfo(profileData) {
+    return await post('/api/auth/login', profileData)
 }
 

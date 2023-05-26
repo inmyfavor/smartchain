@@ -6,6 +6,11 @@ const AuthContext = React.createContext(null);
 
 const prevUser = JSON.parse(window.localStorage.user || 'null');
 
+let _user;
+export function getUser() {
+  return _user;
+}
+
 export function AuthProvider({ children }) {
   const [user, setUser] = React.useState(prevUser);
 
@@ -15,6 +20,7 @@ export function AuthProvider({ children }) {
   };
 
   const value = { user, signin };
+  _user = user;
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
