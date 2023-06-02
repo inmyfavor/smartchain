@@ -15,6 +15,7 @@ export function AuthProvider({ children }) {
   const [user, setUser] = React.useState(prevUser);
 
   const signin = (user) => {
+    _user = user;
     setUser(user);
     window.localStorage.user = JSON.stringify(user);
   };

@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
 
 import Input from '../Input';
-import {PinkButton} from '../Button';
+import { PinkButton}  from '../Button';
 import Modal from './Modal';
 
 import { useNavigate } from 'react-router-dom';
@@ -28,6 +28,15 @@ const Login = (props) => {
         }
         const userType = props.selectedUser === 'Прохожий' ? 'stranger' : 'owner'
         auth.signin({...userData, type: userType});
+
+        const owner = (await api.getRegisterInfo()).owner;
+        console.log(owner)
+        if ((owner === 0 && userType === 'owner') || (owner === 1 && userType === 'stranger')) {
+            auth.signin(null);
+            setError('Роль пользователя не совпадает с выбранной');
+            return;
+        }
+
         const to = props.selectedUser === 'Прохожий' ? '/' : '/devices';
         navigate(to, { replace: true });
     }
