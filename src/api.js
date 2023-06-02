@@ -68,7 +68,16 @@ export async function getRegisterInfo() {
     return await get(`/api/user?api_token=${user.api_token}`)
 }
 
-export async function changeProfileInfo(profileData) {
-    return await post('/api/auth/login', profileData)
+export async function updateProfileInfo(profileData) {
+    const user = getUser()
+    return await get(`/api/user_update?api_token=${user.api_token}&${new URLSearchParams({
+        email: profileData.email,
+        lastname: profileData.lastname,
+        firstname: profileData.firstname,
+        phone: profileData.phone,
+        tech_tel: profileData.tech_tel,
+        'company.name': profileData.company?.name
+    })}`)
+    // return await get(`/api/user_update?api_token=${user.api_token}&lastname=${profileData.lastname}&firstname=${profileData.firstname}`)
 }
 

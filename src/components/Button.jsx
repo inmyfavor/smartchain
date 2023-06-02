@@ -8,8 +8,8 @@ const Button = (props) => {
             onClick={props.onClick}
             disabled={props.disabled}
             className={classNames('flex justify-center items-center rounded-[8px] bg-gradient-to-br text-white font-medium', {
-                [props.disabledColor]: props.isDisabled,
-                [props.enabledColor]: !props.isDisabled,
+                [props.disabledColor]: props.disabled,
+                [props.enabledColor]: !props.disabled,
                 'transition-all hover:brightness-[.90]': !props.disabled
             }, props.className)}
         >

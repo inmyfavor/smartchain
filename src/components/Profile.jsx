@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 
 import { PinkButton } from '../components/Button.jsx';
 import Input from '../components/Input.jsx';
 import PageNav from '../components/PageNav.jsx';
 
 import { useAuth } from '../auth';
-import { getRegisterInfo } from '../api.js';
+import { getRegisterInfo, updateProfileInfo } from '../api.js';
 
 const tabs = {
     'profile': 'Профиль',
@@ -26,11 +26,31 @@ const Line = (props) => {
 
 const ModalProfile = (props) => {
 
-    const [data, setData] = useState({})
+    const [data, setData] = useState({});
+    const [initData, setInitData] = useState({});
+    const isValid = useMemo(() => {
+        for (let key in data) {
+            if (initData[key] && data[key] === '') {
+                return false;
+            }
+        }
+        if (data['company']) {
+            if (initData['company'].name ? data['company'].name !== initData['company'].name : data['company'].name) {
+                return true;
+            }
+        }
+        for (let key in data) {
+            if (initData[key] ? data[key] !== initData[key] : data[key]) {
+                return true;
+            }
+        }
+     }, [data, initData]);
+    const [pending, setPending] = useState(false);
     useEffect(() => {
        (async () => {
             const info = await getRegisterInfo();
             setData(info);
+            setInitData(info);
        })()
     }, []);
 
@@ -43,6 +63,7 @@ const ModalProfile = (props) => {
                 if (i === path.length-1) {
                     obj[f] = value;
                 } else {
+                    if (!obj[f]) obj[f] = {}
                     obj = obj[f];
                 }
             });
@@ -54,7 +75,7 @@ const ModalProfile = (props) => {
         <div className='flex flex-col justify-end w-full min-h-[320px] bg-header-blue rounded-[16px] p-[16px]'>
             <div className='flex flex-col gap-[8px] mb-[24px]'>
                 <Line title='Логин' value={data.email} setValue={dispatch('email')}/>
-                <Line title='Пароль' value={data.password} setValue={dispatch('password')}/>
+                {/* <Line title='Пароль' value={data.password} setValue={dispatch('password')}/> */}
                 <Line title='Имя' value={data.firstname} setValue={dispatch('firstname')}/>
                 { props.userType === 'owner' &&
                     <>
@@ -65,7 +86,15 @@ const ModalProfile = (props) => {
                 }
                 <Line title='Номер телефона' value={data.phone} setValue={dispatch('phone')}/>
             </div>
-            <PinkButton className='w-1/4 h-[40px]'>Сохранить</PinkButton>
+            <PinkButton 
+                className='w-1/4 h-[40px]'
+                onClick={() => {
+                    updateProfileInfo(data).then(() => setInitData(data)).finally(() => setPending(false));
+                    setPending(true);
+                }}
+                disabled={!isValid||pending}>
+                    {pending ? 'Обновление...' : 'Сохранить'}
+            </PinkButton>
         </div>
     );
 };

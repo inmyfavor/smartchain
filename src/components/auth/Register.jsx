@@ -31,7 +31,7 @@ const Register = (props) => {
         if (isEmpty(data)) {
             let userData;
             try {
-                data.owner = props.selectedUser !== 'Прохожий';
+                data.owner = props.selectedUser === 'Владелец';
                 userData = await api.register(data);
                 console.log(userData);
             } catch(e) {
