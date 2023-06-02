@@ -35,11 +35,12 @@ const ModalProfile = (props) => {
             }
         }
         if (data['company']) {
-            if (initData['company'].name ? data['company'].name !== initData['company'].name : data['company'].name) {
+            if (initData['company']?.name ? data['company'].name !== initData['company']?.name : data['company'].name) {
                 return true;
             }
         }
         for (let key in data) {
+            if (key === 'company') continue;
             if (initData[key] ? data[key] !== initData[key] : data[key]) {
                 return true;
             }
@@ -50,7 +51,9 @@ const ModalProfile = (props) => {
        (async () => {
             const info = await getRegisterInfo();
             setData(info);
-            setInitData(info);
+            let initData = Object.assign({}, info);
+            if (initData.company) initData.company = Object.assign({}, initData.company);
+            setInitData(initData);
        })()
     }, []);
 

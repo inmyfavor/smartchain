@@ -30,7 +30,7 @@ const Login = (props) => {
         auth.signin({...userData, type: userType});
 
         const owner = (await api.getRegisterInfo()).owner;
-        console.log(owner)
+       
         if ((owner === 0 && userType === 'owner') || (owner === 1 && userType === 'stranger')) {
             auth.signin(null);
             setError('Роль пользователя не совпадает с выбранной');
