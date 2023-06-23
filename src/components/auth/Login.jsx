@@ -29,13 +29,13 @@ const Login = (props) => {
         const userType = props.selectedUser === 'Прохожий' ? 'stranger' : 'owner'
         auth.signin({...userData, type: userType});
 
-        const owner = (await api.getRegisterInfo()).owner;
+        // const owner = (await api.getRegisterInfo()).owner;
        
-        if ((owner === 0 && userType === 'owner') || (owner === 1 && userType === 'stranger')) {
-            auth.signin(null);
-            setError('Роль пользователя не совпадает с выбранной');
-            return;
-        }
+        // if ((owner === 0 && userType === 'owner') || (owner === 1 && userType === 'stranger')) {
+        //     auth.signin(null);
+        //     setError('Роль пользователя не совпадает с выбранной');
+        //     return;
+        // }
 
         const to = props.selectedUser === 'Прохожий' ? '/' : '/devices';
         navigate(to, { replace: true });

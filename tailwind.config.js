@@ -19,6 +19,7 @@ module.exports = {
       },
       screens: {
         'min': { 'raw': '(max-width: 1280px)' },
+        'profile-modal': { 'raw': '(min-width: 800px)' },
       },
     },
   },

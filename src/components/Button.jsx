@@ -8,10 +8,9 @@ const Button = (props) => {
             onClick={props.onClick}
             disabled={props.disabled}
             className={classNames('flex justify-center items-center rounded-[8px] bg-gradient-to-br text-white font-medium', {
-                [props.disabledColor]: props.disabled,
-                [props.enabledColor]: !props.disabled,
+                'brightness-[0.5]' : props.disabled,
                 'transition-all hover:brightness-[.90]': !props.disabled
-            }, props.className)}
+            }, props.className, [props.enabledColor])}
         >
             {props.children}
         </button>
@@ -21,7 +20,6 @@ const Button = (props) => {
 export const PinkButton = (props) => {
     return (
         <Button
-            disabledColor='from-[#363244] to-[#36274f] text-[#a8a9bc]'
             enabledColor='from-[#ffe555] to-[#fa5ddb]'
             {...props}
         />

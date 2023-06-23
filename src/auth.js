@@ -20,7 +20,13 @@ export function AuthProvider({ children }) {
     window.localStorage.user = JSON.stringify(user);
   };
 
-  const value = { user, signin };
+  const changeType = (type) => {
+    _user.type = type;
+    setUser({..._user});
+    window.localStorage.user = JSON.stringify(_user);
+  }
+
+  const value = { user, signin, changeType };
   _user = user;
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
