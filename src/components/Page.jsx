@@ -23,7 +23,7 @@ const Header = (props) => {
                     content={
                         <div className="w-[120px] flex flex-col gap-[8px]">
                             <Link to="/profile" className='text-[14px] cursor-pointer'>Личный кабинет</Link>
-                            <div className='text-[14px] cursor-pointer'>Сменить профиль</div>
+                            <div className='text-[14px] cursor-pointer' onClick={() => setModal('changeUser')}>Сменить профиль</div>
                             <div className='text-[14px] cursor-pointer' onClick={() => setModal('logout')}>Выйти</div>
                         </div>
                     }
@@ -53,7 +53,18 @@ const Header = (props) => {
             { modal !== null &&
             <div className='fixed z-[10] w-full h-full top-0 left-0 flex justify-center items-center bg-[rgba(67,68,111,0.7)]'>
                 <div onClick={() => setModal(null)}  className='absolute w-full h-full z-[0]'></div>
-                <Confirm close={() => setModal(null)}/>
+                { modal === 'logout'
+                    ? <Confirm 
+                    close={() => setModal(null)}
+                    title='Выйти из профиля'
+                    text='Вы уверены, что хотите выйти из профиля?'
+                    modal={modal}/>
+                    : <Confirm 
+                    close={() => setModal(null)}
+                    title='Сменить профиль'
+                    text={`Вы уверены, что хотите стать ${user === 'owner' ? 'Прохожим' : 'Владельцем'}`}
+                    modal={modal}/>
+                }
             </div> }
         </>
     );

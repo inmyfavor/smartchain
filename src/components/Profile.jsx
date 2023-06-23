@@ -339,8 +339,7 @@ const Profile = () => {
                     close={() => setModal(null)}
                     title='Выйти из профиля'
                     text='Вы уверены, что хотите выйти из профиля?'
-                    modal={modal}
-                    setModal={setModal}/>
+                    modal={modal}/>
             </div> }
         </>
     );

@@ -34,9 +34,9 @@ const Confirm = (props) => {
                     className='font-medium text-[18px] text-text-blue w-1/2 border-r-[0.5px] border-[#ffffff66]'>НЕТ</button>
                 <button
                     onClick={props.modal === 'logout' ? logout : changeUser}
-                    className={classNames('font-medium text-[18px] text-text-gray w-1/2', {
+                    className={classNames('font-medium text-[18px]  w-1/2', {
                         'text-text-gray' : props.modal === 'logout',
-                        'text-text-blue' : props.modal === 'changeUser'
+                        'text-text-blue' : props.modal === 'changeUser',
                     })}>
                         ДА
                     </button>
