@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 
 import { BlueButton } from '../components/Button.jsx';
 import Input from '../components/Input.jsx';
-import PageNav from '../components/PageNav.jsx';
+// import PageNav from '../components/PageNav.jsx';
 
 import { useAuth } from '../auth';
 import { getRegisterInfo, updateProfileInfo } from '../api.js';
@@ -176,7 +176,7 @@ const Modal = () => {
                 <div className='flex flex-col gap-[8px] w-full'>
                     <ModalInput title='Юр.название компании' value={data.company?.name} setValue={dispatch('company')}/>
                     <ModalInput title='ИНН' value={data.tin} setValue={dispatch('tin')}/>
-                    <ModalInput title='Привязка карты' value='0000 0000 0000 0000' setValue={dispatch('card')}/>
+                    <ModalInput title='Привязка карты' value={'0000 0000 0000 0000'} setValue={dispatch('card')}/>
                     <div className='text-[14px] text-text-blue underline cursor-pointer pl-[16px]'>
                         Привязать карту
                     </div>

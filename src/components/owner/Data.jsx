@@ -108,49 +108,60 @@ export const markers = [
     { id: 2, lat: 55.951997, lon: 37.617734 },
     { id: 3, lat: 55.751999, lon: 37.917634 },
     { id: 4, lat: 55.851989, lon: 37.617624 },
-]
-
-export const deviceInfo = [
-    { id: '1', name: 'Скамейка', income: '1000', ad: 5, application: 3, markers: [ {lat: 55.755687, lon: 37.829557} ], 
-    address: 'г.Москва, ул. Молостовых, 14А', version: 2, secondName: 'скамейки', number: '0001',
-    status: 'ok',
-        settings: {
-            dateAndTime: true,
-            temperature: false,
-            weatherNow: true,
-            weather3hours: true,
-            weather6hours: true,
-            weather9hours: false,
-            ad: true,
-            curencyUSD: true,
-            curencyEUR: true,
-            gallery: false
-        }
-    },
-    { id: '2', name: 'Урна', income: '3000', ad: 15, application: 10, markers: [ {lat: 55.755687, lon: 37.829557} ], 
-    address: 'г.Москва, ул. Молостовых, 14А', version: 2, leftWidth: '50%', rightWidth: '75%', secondName: 'урны',
-    status: 'ok',
-    number: '0001',
-        settings: {
-            dateAndTime: true,
-            temperature: true,
-            weatherNow: true,
-            weather3hours: true,
-            weather6hours: true,
-            weather9hours: false,
-            ad: false,
-            curencyUSD: true,
-            curencyEUR: true,
-            levels: true
-        }
-    },
-    { id: '3', name: 'Фонарный столб', income: '0', ad: 0, application: 0, markers: [ {lat: 55.755687, lon: 37.829557} ], 
-    address: 'г.Москва, ул. Молостовых, 14А', version: 2, filter: 'brightness-[.6]', number: '0001',
-    status: 'disabled' },
-    { id: '4', name: 'Дорожный знак', income: '0', ad: 0, application: 0, markers: [ {lat: 55.755687, lon: 37.829557} ], 
-    address: 'г.Москва, ул. Молостовых, 14А', version: 2, filter: 'brightness-[.6]', number: '0001',
-    status: 'disabled' },
 ];
+
+// const [benches, setBenches] = useState();
+
+// useEffect(() => {
+//     (async () => {
+//         const benches = await getBenches();
+//         setBenches(benches);
+//     })()
+//  }, []);
+
+// export const deviceInfo = getBenches();
+
+// export const deviceInfo = [
+//     { id: '1', name: 'Скамейка', income: '1000', ad: 5, application: 3, markers: [ {lat: 55.755687, lon: 37.829557} ], 
+//     address: 'г.Москва, ул. Молостовых, 14А', version: 2, secondName: 'скамейки', number: '0001',
+//     status: 'ok',
+//         settings: {
+//             dateAndTime: true,
+//             temperature: false,
+//             weatherNow: true,
+//             weather3hours: true,
+//             weather6hours: true,
+//             weather9hours: false,
+//             ad: true,
+//             curencyUSD: true,
+//             curencyEUR: true,
+//             gallery: false
+//         }
+//     },
+//     { id: '2', name: 'Урна', income: '3000', ad: 15, application: 10, markers: [ {lat: 55.755687, lon: 37.829557} ], 
+//     address: 'г.Москва, ул. Молостовых, 14А', version: 2, leftWidth: '50%', rightWidth: '75%', secondName: 'урны',
+//     status: 'ok',
+//     number: '0001',
+//         settings: {
+//             dateAndTime: true,
+//             temperature: true,
+//             weatherNow: true,
+//             weather3hours: true,
+//             weather6hours: true,
+//             weather9hours: false,
+//             ad: false,
+//             curencyUSD: true,
+//             curencyEUR: true,
+//             levels: true
+//         }
+//     },
+//     { id: '3', name: 'Фонарный столб', income: '0', ad: 0, application: 0, markers: [ {lat: 55.755687, lon: 37.829557} ], 
+//     address: 'г.Москва, ул. Молостовых, 14А', version: 2, filter: 'brightness-[.6]', number: '0001',
+//     status: 'disabled' },
+//     { id: '4', name: 'Дорожный знак', income: '0', ad: 0, application: 0, markers: [ {lat: 55.755687, lon: 37.829557} ], 
+//     address: 'г.Москва, ул. Молостовых, 14А', version: 2, filter: 'brightness-[.6]', number: '0001',
+//     status: 'disabled' },
+// ];
 
 export const show = [
     { id: 1, name: 'ООО "Газпром"', wasted: '200 / 300', date: '24/11/2019-28/11/2019'},

@@ -1,12 +1,23 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Device from './Device';
 
-import { deviceInfo } from '../owner/Data';
+// import { deviceInfo } from '../owner/Data';
 
 import { GreenButton } from '../Button';
 
+import { getBenches } from '../../api';
+
 const Devices = () => {
+    const [benches, setBenches] = useState([]);
+
+    useEffect(() => {
+        (async () => {
+            const benches = await getBenches();
+            setBenches(Array.from(benches));
+        })()
+    }, []);
+
     return (
         <div className='flex flex-col py-[50px] px-[72px]'>
             <div className='flex items-center'>
@@ -16,7 +27,7 @@ const Devices = () => {
                 </GreenButton>
             </div>
             <div className='flex flex-col gap-[10px] mt-[24px]'>
-                {deviceInfo.map(device => <Device key={'device:'+device.id} {...device}/>)}
+                {benches?.map(bench => <Device key={'bench:'+bench.id} {...bench}/>)}
             </div>
         </div>
     );

@@ -10,9 +10,9 @@ import SignIcon from './devicesIcons/SignIcon';
 import WifiIcon from './devicesIcons/WifiIcon';
 
 const DeviceType = (props) => {
-    const fill = props.status === 'ok' 
+    const fill = props.status === 'online' 
         ? 'url(#paint0_linear_2594_5357)'
-    : props.status === 'disabled'
+    : props.status === 'offline'
         ? '#A8A9BC'
     : props.status === 'error'
         ? '#EB5757'

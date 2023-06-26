@@ -68,6 +68,16 @@ export async function getRegisterInfo() {
     return await get(`/api/user?api_token=${user.api_token}`)
 }
 
+export async function getBenches() {
+    const user = getUser()
+    return await get(`/api/user_benches?api_token=${user.api_token}`)
+}
+
+export async function getBenchInfo(bench_id) {
+    const user = getUser()
+    return await get(`/api/bench?api_token=${user.api_token}&bench_id=${bench_id}`)
+}
+
 export async function updateProfileInfo(profileData) {
     const user = getUser()
     return await get(`/api/user_update?api_token=${user.api_token}&${new URLSearchParams({

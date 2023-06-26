@@ -1,10 +1,12 @@
-import React, { useLayoutEffect, useRef, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 
 import classNames from 'classnames';
 
 import AboutDevice from './AboutDevice';
 import Settings from './Settings';
 import DeviceType from '../DeviceType';
+
+import { getBenchInfo } from '../../api';
 
 export const Status = (props) => {
     return (
@@ -42,44 +44,63 @@ const Device = (props) => {
         ref.current.style['max-height'] = ref.current.firstChild.offsetHeight + 48 + 'px';
     });
 
+    const [benchInfo, setBenchInfo] = useState({});
+
+    useEffect(() => {
+        (async () => {
+            const benchInfo = await getBenchInfo(props.id);
+            setBenchInfo(benchInfo);
+        })()
+    }, []);
+
     return (
-        <div className={props.filter}>
+        <div className={classNames({'brightness-[.6]': !props.settings_available})}>
             <div className={classNames(
                 'transition-all flex flex-row h-[78px] rounded-[16px] py-[12px] px-[16px] w-full xl:w-3/4',
                 (panel != null) ? 'bg-dark-blue' : 'bg-header-blue'
             )}>
                 
-                <div className='flex flex-col gap-[8px]'>
+                <div className='flex flex-col gap-[8px] w-1/3'>
                     <div className='flex items-center gap-[8px] text-white text-[16px] font-medium'>
-                        <IconStatus icon={ <DeviceType name={props.name} status={props.status}/> } />
-                        {props.name} №{props.number}
+                        <IconStatus icon={ <DeviceType name={props.type} status={props.status}/> } />
+                        {props.title} 
+                        {/* №{props.number} */}
                     </div>
-                    { !props.filter &&
+                    { props.settings_available &&
                     <div className='flex flex-row items-center gap-[11px]'>
                         <img src='svg/location.svg' alt=''/>
-                        <span className='text-[12px] text-text-blue'>{props.address}</span>
+                        <span className='text-[12px] text-text-blue'>{benchInfo.address}</span>
                     </div>
-                    }
+                    } 
                 </div>
                 <div className='flex-1'></div>
-                <div className='flex flex-row gap-[50px] justify-center ml-[16px]'>
+                <div className='flex flex-row gap-[50px] justify-center ml-[16px] w-1/2'>
                     <div className='flex flex-col gap-[8px] items-center'>
                         <div className='text-text-gray text-[14px]'>Объявления</div>
-                        <div className='text-white font-medium text-[16px]'>{props.ad}</div>
+                        <div className='text-white font-medium text-[16px]'>
+                            {/* {props.ad} */}
+                            0
+                        </div>
                     </div>
                     <div className='flex flex-col gap-[8px] items-center'>
                         <div className='text-text-gray text-[14px]'>Заявки</div>
-                        <div className='text-text-blue font-mediun text-[16px]'>{props.application}</div>
+                        <div className='text-text-blue font-mediun text-[16px]'>
+                            {/* {props.application} */}
+                            0
+                        </div>
                     </div>
                     <div className='flex flex-col gap-[8px] items-center'>
                         <div className='text-text-gray text-[14px]'>Доход</div>
-                        <div className='text-white text-[16px] font-medium min-w-[120px] text-center'>{props.income} руб</div>
+                        <div className='text-white text-[16px] font-medium min-w-[120px] text-center'>
+                            {/* {props.income} руб */}
+                            0 руб
+                            </div>
                     </div>
                 </div>
                 <div className='flex-1'></div>
-                <div className='flex flex-row gap-[8px] justify-end'>
+                <div className='flex flex-row gap-[8px] justify-end w-1/6'>
                     <button
-                        disabled={props.status === 'disabled'}
+                        disabled={props.status === 'offline'}
                         onClick={createSetPanel('about')}
                         className={classNames(
                             'flex items-center justify-center w-[24px] h-[24px] rounded-[24px] shrink-0',
@@ -89,7 +110,7 @@ const Device = (props) => {
                         <img src='svg/money.svg' alt=''/>
                     </button>
                     <button
-                        disabled={props.status === 'disabled'}
+                        disabled={props.status === 'offline'}
                         onClick={createSetPanel('settings')}
                         className={classNames(
                             'flex items-center justify-center w-[24px] h-[24px] rounded-[24px] shrink-0',
@@ -107,14 +128,16 @@ const Device = (props) => {
                             ? <AboutDevice 
                                 id={props.id-1} 
                                 setPanel={createSetPanel(null)}
-                                name={props.name}
-                                status={props.status}/>
+                                // name={props.name}
+                                // status={props.status}
+                                />
                         : panel === 'settings'
                             ? <Settings 
                                 id={props.id-1} 
                                 setPanel={createSetPanel(null)} 
-                                name={props.name}
-                                status={props.status}/>
+                                // name={props.name}
+                                // status={props.status}
+                                />
                         : null
                     }
                 </div>
