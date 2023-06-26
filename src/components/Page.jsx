@@ -5,7 +5,8 @@ import { Link } from "react-router-dom";
 import { useAuth } from '../auth';
 import Tippy from "@tippyjs/react";
 import classNames from "classnames";
-import Confirm from "./Confirm";
+import Confirm from "../profile/Confirm";
+// import Confirm from "./Confirm";
 
 const Header = (props) => {
     const auth = useAuth();

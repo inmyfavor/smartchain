@@ -7,7 +7,7 @@ import MyContent from './components/mycontent/MyContent.jsx';
 import Devices from './components/devices/Devices.jsx';
 import Layout from './components/Layout';
 import Auth from './components/auth/Auth';
-import Profile from './components/Profile';
+import Profile from './profile/Profile';
 
 const AppRoutes = () => {
     return (
