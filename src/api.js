@@ -78,6 +78,13 @@ export async function getBenchInfo(bench_id) {
     return await get(`/api/bench?api_token=${user.api_token}&bench_id=${bench_id}`)
 }
 
+export async function getModes(bench_id) {
+    const user = getUser()
+    return await post(`/api/get_modes?api_token=${user.api_token}&bench_id=${bench_id}`)
+}
+
+// post /api/get_modes?api_token=3vI0En7EYsnY78q9Qt0oQVgKJZun4RbB&bench_id=1
+
 export async function updateProfileInfo(profileData) {
     const user = getUser()
     return await get(`/api/user_update?api_token=${user.api_token}&${new URLSearchParams({

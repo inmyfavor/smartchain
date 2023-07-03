@@ -8,13 +8,13 @@ import DeviceType from '../DeviceType';
 
 import { getBenchInfo } from '../../api';
 
-export const Status = (props) => {
-    return (
-        <div className='flex justify-center items-center bg-main-blue h-[16px] w-[16px] rounded-[16px]'>
-            <div className={classNames('w-[8px] h-[8px] rounded-[8px] bg-gradient-to-br', props.gradient)}></div>
-        </div>
-    );
-};
+// export const Status = (props) => {
+//     return (
+//         <div className='flex justify-center items-center bg-main-blue h-[16px] w-[16px] rounded-[16px]'>
+//             <div className={classNames('w-[8px] h-[8px] rounded-[8px] bg-gradient-to-br', props.gradient)}></div>
+//         </div>
+//     );
+// };
 
 const IconStatus = (props) => {
     return (
@@ -100,7 +100,8 @@ const Device = (props) => {
                 <div className='flex-1'></div>
                 <div className='flex flex-row gap-[8px] justify-end w-1/6'>
                     <button
-                        disabled={props.status === 'offline'}
+                        // disabled={props.status === 'offline'}
+                        disabled
                         onClick={createSetPanel('about')}
                         className={classNames(
                             'flex items-center justify-center w-[24px] h-[24px] rounded-[24px] shrink-0',
@@ -110,7 +111,7 @@ const Device = (props) => {
                         <img src='svg/money.svg' alt=''/>
                     </button>
                     <button
-                        disabled={props.status === 'offline'}
+                        // disabled={props.status === 'offline'}
                         onClick={createSetPanel('settings')}
                         className={classNames(
                             'flex items-center justify-center w-[24px] h-[24px] rounded-[24px] shrink-0',

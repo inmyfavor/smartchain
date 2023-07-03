@@ -13,7 +13,17 @@ import Map from '../Map';
 // import { deviceInfo } from '../owner/Data';
 import { BlueButton } from '../Button';
 
-import { Status } from './Device';
+// import { Status } from './Device';
+
+import { getModes } from '../../api';
+
+// const Status = (props) => {
+//     return (
+//         <div className='flex justify-center items-center bg-main-blue h-[16px] w-[16px] rounded-[16px]'>
+//             <div className={classNames('w-[8px] h-[8px] rounded-[8px] bg-gradient-to-br', props.gradient)}></div>
+//         </div>
+//     );
+// };
 
 // const Check = (props) => {
 //     const [checked, setChecked] = useState(props.value);
